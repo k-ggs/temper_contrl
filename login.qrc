@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>login/qml/controls/CloseButton.qml</file>
+        <file>login/qml/controls/FormInput.qml</file>
+        <file>login/qml/controls/IconButton.qml</file>
+        <file>login/qml/controls/StandardButton.qml</file>
+        <file>login/Login.qml</file>
+        <file>login/images/closeIcon.png</file>
+        <file>login/images/facebookIcon.svg</file>
+        <file>login/images/heroBg.png</file>
+        <file>login/images/heroLogo.png</file>
+        <file>login/images/in-kv012.jpg</file>
+        <file>login/images/in-kv013.jpg</file>
+    </qresource>
+</RCC>

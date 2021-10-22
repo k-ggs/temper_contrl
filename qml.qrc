@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Content_ui.qml</file>
+        <file>Taotitle_ui.qml</file>
+        <file>Gauge_view_ui.qml</file>
+        <file>Plot_view_ui.qml</file>
+        <file>valve_ui.qml</file>
+    </qresource>
+</RCC>

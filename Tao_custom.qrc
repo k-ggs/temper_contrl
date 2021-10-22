@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Tao_custom_Qml/Biz/CircleText.qml</file>
+        <file>Tao_custom_Qml/Biz/CloseBtn.qml</file>
+        <file>Tao_custom_Qml/Biz/ExpandBtn.qml</file>
+        <file>Tao_custom_Qml/Biz/LangBtn.qml</file>
+        <file>Tao_custom_Qml/Biz/SkinBtn.qml</file>
+        <file>Tao_custom_Qml/Dialog/AboutDialog.qml</file>
+        <file>Tao_custom_Qml/Dialog/SettingsDialog.qml</file>
+        <file>Tao_custom_Qml/Page/ControlsShow.qml</file>
+        <file>Tao_custom_Qml/Page/Home.qml</file>
+        <file>Tao_custom_Qml/Pane/ContentModel.qml</file>
+        <file>Tao_custom_Qml/Pane/LeftPane.qml</file>
+        <file>Tao_custom_Qml/Pane/RightPane.qml</file>
+        <file>Tao_custom_Qml/Pane/TitlePane.qml</file>
+        <file>Tao_custom_Qml/instrument/S5WDial.qml</file>
+        <file>Tao_custom_Qml/Dialog/Colorpicker.qml</file>
+        <file>Tao_custom_Qml/content/Checkerboard.qml</file>
+        <file>Tao_custom_Qml/content/ColorSlider.qml</file>
+        <file>Tao_custom_Qml/content/NumberBox.qml</file>
+        <file>Tao_custom_Qml/content/Palette.qml</file>
+        <file>Tao_custom_Qml/content/Palettes.qml</file>
+        <file>Tao_custom_Qml/content/PanelBorder.qml</file>
+        <file>Tao_custom_Qml/content/SBPicker.qml</file>
+        <file>Tao_custom_Qml/instrument/DashboardGaugeStyle.qml</file>
+        <file>Tao_custom_Qml/instrument/IconGaugeStyle.qml</file>
+        <file>Tao_custom_Qml/instrument/TachometerStyle.qml</file>
+        <file>Tao_custom_Qml/instrument/TurnIndicator.qml</file>
+        <file>Tao_custom_Qml/instrument/ValueSource.qml</file>
+        <file>Tao_custom_Qml/instrument/TemperatureGaugeStyle_ui.qml</file>
+    </qresource>
+</RCC>
