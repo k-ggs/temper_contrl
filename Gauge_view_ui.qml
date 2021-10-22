@@ -12,13 +12,15 @@ import"./TaoQuick"
     Rectangle{
         id:contenplot
         anchors.fill: parent
+
            color:  CusConfig.controlBorderColor
   // Layout.preferredHeight:content.height*0.3
  //  Layout.preferredWidth : content.width*0.5
   GridLayout{
       anchors.fill: parent
-      anchors.margins: 20
-      columns:6
+      anchors.margins:40
+      columns:3
+      columnSpacing: 10
       rowSpacing: 55
 
 
@@ -40,7 +42,7 @@ CusLabel {
 horizontalAlignment: Qt.AlignHCenter
 anchors.fill: parent
 
-    text: qsTr("油箱温度")
+    text: Temper_Config.temp1
 }
 StatusIndicator{
 //     id:light
@@ -67,15 +69,15 @@ txt_Unit: qsTr("℃")
 Rectangle{
     anchors.top: parent.bottom
     anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
+    height: CusConfig.fixedHeight
+     width:120
     color:CusConfig.controlBorderColor
     anchors.horizontalCenter: parent.horizontalCenter
 CusLabel {
 horizontalAlignment: Qt.AlignHCenter
 anchors.fill: parent
 
-    text: qsTr("试验箱温度1")
+    text:  Temper_Config.temp2
 }
 StatusIndicator{
 //    id:light
@@ -84,7 +86,7 @@ width: height
 //radius: width/2
 color: valueSource.kph>80?"red":"blue"
 anchors.right:parent.right
-
+active: true
 anchors.verticalCenter: parent.verticalCenter
  anchors.rightMargin: 3
 }
@@ -100,21 +102,21 @@ txt_Unit: qsTr("℃")
 Rectangle{
     anchors.top: parent.bottom
     anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
+     height: CusConfig.fixedHeight
+     width:120
   color:CusConfig.controlBorderColor
     anchors.horizontalCenter: parent.horizontalCenter
 CusLabel {
 horizontalAlignment: Qt.AlignHCenter
 anchors.fill: parent
 
-    text: qsTr("试验箱温度2")
+    text:  Temper_Config.temp3
 }
 StatusIndicator{
   //  id:light
 height: parent.height-2
 width: height
-//radius: width/2
+active: true
 color: valueSource.kph>80?"red":"blue"
 anchors.right:parent.right
 anchors.verticalCenter: parent.verticalCenter
@@ -134,21 +136,21 @@ txt_Unit: qsTr("℃")
 Rectangle{
     anchors.top: parent.bottom
     anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
+    height: CusConfig.fixedHeight
+     width:120
    color:CusConfig.controlBorderColor
     anchors.horizontalCenter: parent.horizontalCenter
 CusLabel {
 horizontalAlignment: Qt.AlignHCenter
 anchors.fill: parent
 
-    text: qsTr("进管道温度")
+    text:  Temper_Config.temp4
 }
 StatusIndicator{
  //   id:light
 height: parent.height-2
 width: height
-//radius: width/2
+active: true
 color: valueSource.kph>80?"red":"blue"
 anchors.right:parent.right
 anchors.verticalCenter: parent.verticalCenter
@@ -167,21 +169,21 @@ txt_Unit: qsTr("℃")
 Rectangle{
     anchors.top: parent.bottom
     anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
+    height: CusConfig.fixedHeight
+     width:120
      color:CusConfig.controlBorderColor
     anchors.horizontalCenter: parent.horizontalCenter
 CusLabel {
 horizontalAlignment: Qt.AlignHCenter
 anchors.fill: parent
 
-    text: qsTr("出管道温度")
+    text:  Temper_Config.temp5
 }
 StatusIndicator{
 //    id:light
 height: parent.height-2
 width: height
-//radius: width/2
+active: true
 color: valueSource.kph>80?"red":"blue"
 anchors.right:parent.right
 
@@ -201,21 +203,21 @@ txt_Unit: qsTr("Mpa")
 Rectangle{
     anchors.top: parent.bottom
     anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
+     height: CusConfig.fixedHeight
+     width:120
     color:CusConfig.controlBorderColor
     anchors.horizontalCenter: parent.horizontalCenter
 CusLabel {
 horizontalAlignment: Qt.AlignHCenter
 anchors.fill: parent
 
-    text: qsTr("进管道压力")
+    text:  Temper_Config.temp6
 }
 StatusIndicator{
  //   id:light
 height: parent.height-2
 width: height
-//radius: width/2
+active: true
 color: valueSource.kph>80?"red":"blue"
 anchors.right:parent.right
 anchors.verticalCenter: parent.verticalCenter

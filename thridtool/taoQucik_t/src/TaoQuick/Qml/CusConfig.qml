@@ -1,4 +1,4 @@
-pragma Singleton
+﻿pragma Singleton
 
 import QtQuick 2.9
 
@@ -238,4 +238,12 @@ QtObject {
             scrollBarBackgroundColor_hovered: "#cfcfd1"
         }
     }
+
+
+
+
+
+
+
+
 }

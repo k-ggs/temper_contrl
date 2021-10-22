@@ -5,6 +5,6 @@
         <file>Taotitle_ui.qml</file>
         <file>Gauge_view_ui.qml</file>
         <file>Plot_view_ui.qml</file>
-        <file>valve_ui.qml</file>
+        <file>Contral_ui.qml</file>
     </qresource>
 </RCC>

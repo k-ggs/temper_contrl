@@ -100,8 +100,8 @@ onMouseYChanged: {
 TaoFramelessWindow{
     id: root
     visible: true
-    width: 1640
-    height: 980
+    width: 1280
+    height: 970
     minimumWidth: 480
     minimumHeight: 320
 

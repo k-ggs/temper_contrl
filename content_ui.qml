@@ -25,121 +25,9 @@ Rectangle {
 
        Layout.fillWidth: true
        Layout.preferredHeight: 60
-/*
-       RowLayout{
-
-       id:it
-      width: 300
-   height:parent.height
-   anchors.left : parent.left
 
 
-   Image {
-
-
-
-   Layout.fillHeight: true
-   Layout.fillWidth: true
-   source: "qrc:/img/Resur/construction2.jpg"
-   horizontalAlignment: Text.AlignHCenter
-   verticalAlignment: Text.AlignVCenter
-   }
-   Text{
-        color: "#e91c1111"
-        font.pointSize: 30
-
-   Layout.fillHeight: true
-   Layout.fillWidth: true
-     text: "--#--"
-     horizontalAlignment: Text.AlignHCenter
-     verticalAlignment: Text.AlignVCenter
-     font.italic: true
-     font.bold: true
-     MouseArea{
-         anchors.fill: parent
-     onClicked:  if(isMaximized){
-                     isMaximized = false;
-                     root.showNormal();
-                   //  normBtnBg.source = "qrc:/res/maximinze_btn.png"
-                 }else{
-                     isMaximized = true;
-                     root.showMaximized();
-                     //normBtnBg.source = "qrc:/res/norm_btn.png"
-                 }
-
-     }
-   }
-
-       }
-
-       RowLayout{
-
-       id:mme
-      width: 150
-   height:parent.height
-   anchors.right: parent.right
-
-
-   Text{
-   id:minbt
-       color: "#ddcfcdcd"
-        font.pointSize: 24
-       font.family: "iconfont"
-   Layout.fillHeight: true
-   Layout.fillWidth: true
-   text: "\uE6C6"
-   horizontalAlignment: Text.AlignHCenter
-   verticalAlignment: Text.AlignVCenter
-   MouseArea{
-   anchors.fill: parent
-   onClicked: {
-       root.showMinimized()
-   }
-   }
-   }
-   Text{
-        color: "#ddcfcdcd"
-        font.pointSize: 24
-       font.family: "iconfont"
-   Layout.fillHeight: true
-   Layout.fillWidth: true
-     text: "\uE6BB"
-     horizontalAlignment: Text.AlignHCenter
-     verticalAlignment: Text.AlignVCenter
-     MouseArea{anchors.fill: parent
-     onClicked:  if(isMaximized){
-                     isMaximized = false;
-                     root.showNormal();
-                   //  normBtnBg.source = "qrc:/res/maximinze_btn.png"
-                 }else{
-                     isMaximized = true;
-                     root.showMaximized();
-                     //normBtnBg.source = "qrc:/res/norm_btn.png"
-                 }
-
-     }
-   }
-   Text{
-        color: "#ddcfcdcd"
-        font.pointSize: 24
-   font.family: "iconfont"
-   Layout.fillHeight: true
-   Layout.fillWidth: true
-    text: "\uE633"
-    horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignVCenter
-    MouseArea{
-    anchors.fill: parent
-    onClicked: {
-        root.close()
-    }
-    }
-   }
-
-       }
-
-*/
-    Taotitle_ui{
+       Taotitle_ui{
         anchors.fill: parent
 
     }
@@ -207,7 +95,9 @@ Loader{width: lis.width
            Layout.fillWidth: true
            Layout.preferredHeight: 200
            color:CusConfig.controlBorderColor
+
            CustomPlotItem{
+
              //  Layout.fillHeight: true
             //   Layout.fillWidth: true
                anchors.fill: parent
@@ -218,7 +108,7 @@ Loader{width: lis.width
 
                graphs : [
                   Graph {
-                                name : "sin"
+                                name : "温度1"
                                 pen : Pen { color : "blue"; width : 1.0 }
                                 scatter : ScatterStyle {
                                     brush : "white"
@@ -245,33 +135,57 @@ Loader{width: lis.width
                                 }
                          },
                   Graph {
-                                name : "parabola"
+                                name : "温度2"
                                 pen : Pen { color : "red"; width : 1.0 }
                                 xAxis : Axis {
                                 useDefault : true
 
                                 }
-                             //   yAxis : Axis
-                             //   {
-                               //     useDefault : false
-                              //  }
+
                             }
 
                             ,
                   Graph {
-                                                        name : "parabola"
-                                                        pen : Pen { color : "green"; width : 1.0 }
-                                                        xAxis : Axis {
-                                                        useDefault : true
+                                    name : "温度3"
+                                    pen : Pen { color : "green"; width : 1.0 }
+                                    xAxis : Axis {
+                                     useDefault : true
 
-                                                        }
-                                                     //   yAxis : Axis
-                                                     //   {
-                                                       //     useDefault : false
-                                                      //  }
-                                                    }
+                                      }
 
-                        ]
+                                       }
+                   ,
+                  Graph {
+                         name :"温度4"
+                        pen : Pen { color : "green"; width : 1.0 }
+                         xAxis : Axis {
+                         useDefault : true
+
+                  }
+
+                  }
+                   ,
+                  Graph {
+                    name : "温度5"
+                    pen : Pen { color : "green"; width : 1.0 }
+                    xAxis : Axis {
+                    useDefault : true
+
+                 }
+
+                   }
+                ,
+                  Graph {
+                    name : "温度6"
+                   pen : Pen { color : "green"; width : 1.0 }
+                    xAxis : Axis {
+                     useDefault : true
+
+                    }
+
+                   }
+
+                   ]
 
                    Timer {
                              interval: 150; running: true; repeat: true
@@ -291,9 +205,12 @@ Loader{width: lis.width
                                      // newY2 = Math.cos(xCurr*Math.PI/100.0);
                                 //  newY3 = Math.tan(xCurr*Math.PI/100.0);
                                      xCurr += 1;
-                                      customPlot.addData(0,  xCurr,   valueSource.kph);
-                                        customPlot.addData(1,  xCurr,   valueSource.temperature);
-                                   customPlot.addData(2,  xCurr,   valueSource.rpm);
+                                   customPlot.addData(0,  xCurr,   valueSource.kph);
+                                   customPlot.addData(1,  xCurr,   valueSource.temperature);
+                                   customPlot.addData(2,  xCurr,  valueSource.kph+ valueSource.rpm);
+                                   customPlot.addData(3,  xCurr,  2* valueSource.rpm);
+                                   customPlot.addData(4,  xCurr,  valueSource.kph+  valueSource.rpm);
+                                   customPlot.addData(5,  xCurr,   valueSource.kph/2+  valueSource.rpm);
                              //    console.log(xCurr)
                               //   }
 
@@ -307,16 +224,18 @@ Loader{width: lis.width
 
        }
        Rectangle{
+           id:rec_con
            Layout.fillWidth: true
            Layout.fillHeight: true
            color:CusConfig.controlBorderColor
-           Tumbler {
-               TumblerColumn {
-                   model: 5
-               }
+           Loader{
+
+               width: rec_con.width
+               height: rec_con.height
+               source: "qrc:/Contral_ui.qml"}
 
            }
-       }
+
        }
        }
 
@@ -326,31 +245,7 @@ Loader{width: lis.width
        }
        Component.onCompleted: {
 
-            // qcplot.initCustomPlot()
-             //qcplot2.initCustomPlot()
-            // qcplot3.initCustomPlot()
-            // qcplot4.initCustomPlot()
-            // qcplot5.initCustomPlot()
-            // qcplot6.initCustomPlot()
-            // qcplot7.initCustomPlot()
-            /// qcplot8.initCustomPlot()
-           //  qcplot9.initCustomPlot()
-           //  qcplot10.initCustomPlot()
-           //  qcplot11.initCustomPlot()
 
-  //  var domain = [];
-  //  var y = [];
-  //  var y2 = [];
-
-   // for (var i=0; i<20; ++i)
-   // {
-   //  domain[i] = i/20.0*10.0;
-   //  y[i] = Math.cos(domain[i]*0.8+Math.sin(domain[i]*0.16+1.0))*Math.sin(domain[i]*0.54)+1.4;
-   //  y2[i] = domain[i]*domain[i];
-  //  }
-
-   // customPlot.addData(0, domain, y);
-   //  customPlot.addData(1, domain, y2);
      customPlot.setRange_tpe( {"lo":-10},2);
        }
 

@@ -108,5 +108,6 @@
         <file>Images/Table_Asc.png</file>
         <file>Images/Table_Desc_Hovered.png</file>
         <file>Images/Table_Desc.png</file>
+        <file>Qml/Temper_Config.qml</file>
     </qresource>
 </RCC>

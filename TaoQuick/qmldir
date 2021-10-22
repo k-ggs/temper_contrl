@@ -1,4 +1,4 @@
-module TaoQuick
+﻿module TaoQuick
 BasicText 1.0 Qml/Basic/BasicText.qml
 BasicTooltip 1.0 Qml/Basic/BasicTooltip.qml
 MoveArea 1.0 Qml/Basic/MoveArea.qml
@@ -84,3 +84,4 @@ CusResizeBorder 1.0 Qml/Misc/CusResizeBorder.qml
 CusShortCutKeys 1.0 Qml/Misc/CusShortCutKeys.qml
 CusTemplateDragBorder 1.0 Qml/Misc/CusTemplateDragBorder.qml
 singleton CusConfig 1.0 Qml/CusConfig.qml
+singleton Temper_Config 1.0 Qml/Temper_Config.qml
