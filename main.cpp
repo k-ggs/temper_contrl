@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-
+Logger::initLog();
     QQmlApplicationEngine engine;
     QmlModulesInstaller::Install();
     QFontDatabase::addApplicationFont(":/Font/Resur/iconfont.ttf");

@@ -10,7 +10,7 @@ Rectangle {
         height: parent.height
         spacing: 4
         Image {
-            source: imgPath + "logo/milk.png"
+            source: imgPath + "logo/ship.png"
         }
 
         Text {
@@ -18,7 +18,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 28
             font.bold: true
-            text: qsTr("数据采集控制系统模板")
+            text: qsTr("红外雷达小船控制系统")
             color: "#ffffff"
         }
     }
@@ -140,8 +140,8 @@ Rectangle {
         MoveArea {
             anchors.fill: parent
             onMove: {
-                view.x += xOffset
-                view.y += yOffset
+                blankItem.x += xOffset
+                blankItem.y += yOffset
             }
         }
     }

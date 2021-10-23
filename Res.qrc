@@ -42,6 +42,7 @@
         <file>Resur/Image/Button/expand.png</file>
         <file>Resur/Trans/keys.json</file>
         <file>Resur/Trans/language_zh.json</file>
+        <file>Resur/Image/logo/ship.png</file>
     </qresource>
     <qresource prefix="/img">
         <file>Resur/construction.jpg</file>

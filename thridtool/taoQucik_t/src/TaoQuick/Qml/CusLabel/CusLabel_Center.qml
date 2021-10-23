@@ -1,11 +1,11 @@
-import QtQuick 2.10
+﻿import QtQuick 2.10
 import QtQuick.Controls 2.2
 import ".."
 import "../.."
 Label {
-    font.pixelSize: Config.fontSize_default
-    color: Config.textColor
-    height: Config.fixedHeight
+    font.pixelSize: CusConfig.fontSize_default
+    color: CusConfig.textColor
+    height: CusConfig.fixedHeight
     elide: Text.ElideRight
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter

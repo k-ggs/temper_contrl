@@ -41,11 +41,11 @@ Rectangle {
              name:"guage"
              source:"qrc:/Gauge_view_ui.qml"
                }
-           ListElement{
-               name:"plot"
-               source:"qrc:/Plot_view_ui.qml"
+          // ListElement{
+           //    name:"plot"
+             //  source:"qrc:/Plot_view_ui.qml"
 
-          }
+         // }
 
        }
        Rectangle{
@@ -59,7 +59,7 @@ Rectangle {
        anchors.fill: parent
        Item {
 
-       Layout.preferredHeight:content.height*0.5
+       Layout.preferredHeight:content.height*0.7
        Layout.fillWidth: true
           Layout.margins: 1
 
@@ -94,7 +94,7 @@ Loader{width: lis.width
        Rectangle{
            Layout.fillWidth: true
            Layout.preferredHeight: 200
-           color:CusConfig.controlBorderColor
+           color:CusConfig.CusConfig.backgroundColor
 
            CustomPlotItem{
 
@@ -103,7 +103,7 @@ Loader{width: lis.width
                anchors.fill: parent
                id: customPlot
 
-               background :CusConfig.controlBorderColor
+               background :CusConfig.CusConfig.backgroundColor
                legend: Legend{ font: "helvetica,-1,8,5,0,0,0,0,0,0"}
 
                graphs : [
@@ -224,10 +224,11 @@ Loader{width: lis.width
 
        }
        Rectangle{
+           visible: false
            id:rec_con
            Layout.fillWidth: true
            Layout.fillHeight: true
-           color:CusConfig.controlBorderColor
+           color:CusConfig.backgroundColor
            Loader{
 
                width: rec_con.width

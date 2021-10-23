@@ -13,390 +13,395 @@ import"./TaoQuick"
         id:contenplot
         anchors.fill: parent
 
-           color:  CusConfig.controlBorderColor
+           color:  CusConfig.backgroundColor
   // Layout.preferredHeight:content.height*0.3
  //  Layout.preferredWidth : content.width*0.5
   GridLayout{
       anchors.fill: parent
-      anchors.margins:40
+      anchors.margins:90
+       anchors.topMargin:10
       columns:3
       columnSpacing: 10
-      rowSpacing: 55
+      rowSpacing:100
 
 
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("℃")
-}
-Rectangle{
+      CircularGauge{
+          Layout.fillHeight: true
+          Layout.fillWidth: true
+      value: valueSource.kph
+      style: DashboardGaugeStyle{
+      txt_Unit: qsTr("℃")
+      }
+ColumnLayout{
+anchors.bottom: parent.bottom
+
     anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fixedHeight
-    width:120
-    color:CusConfig.controlBorderColor
-  //  border.color: CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
+    anchors.topMargin:0
+      Rectangle{
 
-    text: Temper_Config.temp1
-}
-StatusIndicator{
-//     id:light
-active: true
-height: parent.height-2
-width: height
 
-//radius: width/2
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
+          height: CusConfig.fixedHeight
+        //  width:parent.width
+          color:CusConfig.controlBorderColor
+          //border.color: CusConfig.controlBorderColor
+          anchors.horizontalCenter: parent.horizontalCenter
 
+          RowLayout{
+       spacing: 5
+     //  anchors.fill: parent
+       anchors.horizontalCenter: parent.horizontalCenter
+Switch{
 }
+      CusLabel {
+
+
+          text: Temper_Config.temp1
+      }
+      StatusIndicator{
+
+      active: true
+
+      color: valueSource.kph>80?"red":"blue"
+
+
+      }
+          }
+
+      }
+      Rectangle{
+         // anchors.left: parent.right
+           height: parent.height
+          width: 300
+
+          color:CusConfig.themeColor
+
+
+      CusSlider_Spin
+      {width: 300
+      anchors.fill: parent
+
+      }
+
+
+      }
 }
 }
 
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("℃")
-}
-Rectangle{
+      CircularGauge{
+          Layout.fillHeight: true
+          Layout.fillWidth: true
+      value: valueSource.kph
+      style: DashboardGaugeStyle{
+      txt_Unit: qsTr("℃")
+      }
+ColumnLayout{
+anchors.bottom: parent.bottom
+
     anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fixedHeight
-     width:120
-    color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
+    anchors.topMargin:0
+      Rectangle{
 
-    text:  Temper_Config.temp2
+
+          height: CusConfig.fixedHeight
+        //  width:parent.width
+          color:CusConfig.controlBorderColor
+          //border.color: CusConfig.controlBorderColor
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          RowLayout{
+       spacing: 5
+     //  anchors.fill: parent
+       anchors.horizontalCenter: parent.horizontalCenter
+Switch{
 }
-StatusIndicator{
-//    id:light
-height: parent.height-2
-width: height
-//radius: width/2
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-active: true
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
-}
+      CusLabel {
+
+
+          text: Temper_Config.temp1
+      }
+      StatusIndicator{
+
+      active: true
+
+      color: valueSource.kph>80?"red":"blue"
+
+
+      }
+          }
+
+      }
+      Rectangle{
+         // anchors.left: parent.right
+           height: parent.height
+          width: 300
+
+          color:CusConfig.themeColor
+
+
+      CusSlider_Spin
+      {width: 300
+      anchors.fill: parent
+
+      }
+
+
+      }
 }
 }
 
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("℃")
-}
-Rectangle{
+      CircularGauge{
+          Layout.fillHeight: true
+          Layout.fillWidth: true
+      value: valueSource.kph
+      style: DashboardGaugeStyle{
+      txt_Unit: qsTr("℃")
+      }
+ColumnLayout{
+anchors.bottom: parent.bottom
+
     anchors.top: parent.bottom
-    anchors.topMargin: 5
-     height: CusConfig.fixedHeight
-     width:120
-  color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
-
-    text:  Temper_Config.temp3
-}
-StatusIndicator{
-  //  id:light
-height: parent.height-2
-width: height
-active: true
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
-
-}
-}
-}
+    anchors.topMargin:0
+      Rectangle{
 
 
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("℃")
+          height: CusConfig.fixedHeight
+        //  width:parent.width
+          color:CusConfig.controlBorderColor
+          //border.color: CusConfig.controlBorderColor
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          RowLayout{
+       spacing: 5
+     //  anchors.fill: parent
+       anchors.horizontalCenter: parent.horizontalCenter
+Switch{
 }
-Rectangle{
+      CusLabel {
+
+
+          text: Temper_Config.temp1
+      }
+      StatusIndicator{
+
+      active: true
+
+      color: valueSource.kph>80?"red":"blue"
+
+
+      }
+          }
+
+      }
+      Rectangle{
+         // anchors.left: parent.right
+           height: parent.height
+          width: 300
+
+          color:CusConfig.themeColor
+
+
+      CusSlider_Spin
+      {width: 300
+      anchors.fill: parent
+
+      }
+
+
+      }
+}
+}
+
+      CircularGauge{
+          Layout.fillHeight: true
+          Layout.fillWidth: true
+      value: valueSource.kph
+      style: DashboardGaugeStyle{
+      txt_Unit: qsTr("℃")
+      }
+ColumnLayout{
+anchors.bottom: parent.bottom
+
     anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fixedHeight
-     width:120
-   color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
+    anchors.topMargin:0
+      Rectangle{
 
-    text:  Temper_Config.temp4
-}
-StatusIndicator{
- //   id:light
-height: parent.height-2
-width: height
-active: true
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
 
+          height: CusConfig.fixedHeight
+        //  width:parent.width
+          color:CusConfig.controlBorderColor
+          //border.color: CusConfig.controlBorderColor
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          RowLayout{
+       spacing: 5
+     //  anchors.fill: parent
+       anchors.horizontalCenter: parent.horizontalCenter
+Switch{
 }
+      CusLabel {
+
+
+          text: Temper_Config.temp1
+      }
+      StatusIndicator{
+
+      active: true
+
+      color: valueSource.kph>80?"red":"blue"
+
+
+      }
+          }
+
+      }
+      Rectangle{
+         // anchors.left: parent.right
+           height: parent.height
+          width: 300
+
+          color:CusConfig.themeColor
+
+
+      CusSlider_Spin
+      {width: 300
+      anchors.fill: parent
+
+      }
+
+
+      }
 }
 }
 
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("℃")
-}
-Rectangle{
+      CircularGauge{
+          Layout.fillHeight: true
+          Layout.fillWidth: true
+      value: valueSource.kph
+      style: DashboardGaugeStyle{
+      txt_Unit: qsTr("℃")
+      }
+ColumnLayout{
+anchors.bottom: parent.bottom
+
     anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fixedHeight
-     width:120
-     color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
-
-    text:  Temper_Config.temp5
-}
-StatusIndicator{
-//    id:light
-height: parent.height-2
-width: height
-active: true
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
-}
-}
-}
+    anchors.topMargin:0
+      Rectangle{
 
 
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("Mpa")
+          height: CusConfig.fixedHeight
+        //  width:parent.width
+          color:CusConfig.controlBorderColor
+          //border.color: CusConfig.controlBorderColor
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          RowLayout{
+       spacing: 5
+     //  anchors.fill: parent
+       anchors.horizontalCenter: parent.horizontalCenter
+Switch{
 }
-Rectangle{
+      CusLabel {
+
+
+          text: Temper_Config.temp1
+      }
+      StatusIndicator{
+
+      active: true
+
+      color: valueSource.kph>80?"red":"blue"
+
+
+      }
+          }
+
+      }
+      Rectangle{
+         // anchors.left: parent.right
+           height: parent.height
+          width: 300
+
+          color:CusConfig.themeColor
+
+
+      CusSlider_Spin
+      {width: 300
+      anchors.fill: parent
+
+      }
+
+
+      }
+}
+}
+
+      CircularGauge{
+      Layout.fillHeight: true
+      Layout.fillWidth: true
+    //  implicitWidth: 300
+    //  implicitHeight: 300
+      value: valueSource.kph
+      style: DashboardGaugeStyle{
+      txt_Unit: qsTr("℃")
+      }
+ColumnLayout{
+anchors.bottom: parent.bottom
+
     anchors.top: parent.bottom
-    anchors.topMargin: 5
-     height: CusConfig.fixedHeight
-     width:120
-    color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
+    anchors.topMargin:0
+      Rectangle{
 
-    text:  Temper_Config.temp6
-}
-StatusIndicator{
- //   id:light
-height: parent.height-2
-width: height
-active: true
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
 
-}
-}
-}
+          height: CusConfig.fixedHeight
+        //  width:parent.width
+          color:CusConfig.controlBorderColor
+          //border.color: CusConfig.controlBorderColor
+          anchors.horizontalCenter: parent.horizontalCenter
 
-/*
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("Mpa")
+          RowLayout{
+       spacing: 5
+     //  anchors.fill: parent
+       anchors.horizontalCenter: parent.horizontalCenter
+Switch{
 }
-Rectangle{
-    anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
-    color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
+      CusLabel {
 
-    text: qsTr("出管道压力")
-}
-StatusIndicator{
- //   id:light
-height: parent.height-2
-width: height
-//radius: width/2
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
 
-}
+          text: Temper_Config.temp1
+      }
+      StatusIndicator{
+
+      active: true
+
+      color: valueSource.kph>80?"red":"blue"
+
+
+      }
+          }
+
+      }
+      Rectangle{
+         // anchors.left: parent.right
+           height: parent.height
+          width: 300
+
+          color:CusConfig.themeColor
+
+
+      CusSlider_Spin
+      {width: 300
+      anchors.fill: parent
+
+      }
+
+
+      }
 }
 }
 
 
 
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("m³/h")
-}
-Rectangle{
-    anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
-    color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
 
-    text: qsTr("流量")
-}
-StatusIndicator{
- //   id:light
-height: parent.height-2
-width: height
-//radius: width/2
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
-anchors.rightMargin: 3
-
-}
-}
-}
-
-
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("N")
-}
-Rectangle{
-    anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
-    color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
-
-    text: qsTr("侧向加载力")
-}
-StatusIndicator{
- //   id:light
-height: parent.height-2
-width: height
-//radius: width/2
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
-
-}
-}
-}
-
-
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("N")
-}
-Rectangle{
-    anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
-    color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
-
-    text: qsTr("轴向加载力")
-}
-Rectangle{
- //   id:light
-height: parent.height-2
-width: height
-radius: width/2
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
- anchors.rightMargin: 3
-
-}
-}
-}
-
-CircularGauge{   Layout.fillHeight: true
-Layout.fillWidth: true
-   value: valueSource.kph
-style: DashboardGaugeStyle{
-txt_Unit: qsTr("N")
-}
-Rectangle{
-    anchors.top: parent.bottom
-    anchors.topMargin: 5
-    height: CusConfig.fontPixel
-    width:100
-    color:CusConfig.controlBorderColor
-    anchors.horizontalCenter: parent.horizontalCenter
-CusLabel {
-horizontalAlignment: Qt.AlignHCenter
-anchors.fill: parent
-
-    text: qsTr("力矩加载力")
-}
-Rectangle{
- //   id:light
-height: parent.height-2
-width: height
-radius: width/2
-color: valueSource.kph>80?"red":"blue"
-anchors.right:parent.right
-anchors.verticalCenter: parent.verticalCenter
-anchors.rightMargin: 3
-
-}
-}
-}
-*/
 
 
 

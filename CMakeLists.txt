@@ -23,8 +23,29 @@ SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/thridtool/taoQucik_t/cmake)
 
 include(taoVersion)
 
-   add_compile_definitions(TaoCommon_NO_LIB)
-   add_subdirectory(${CMAKE_SOURCE_DIR}/thridtool/taoQucik_t/3rdparty/TaoCommon/src/TaoCommon ${CMAKE_SOURCE_DIR}/build/3rdparty/TaoCommon)
+    add_compile_definitions(TaoCommon_NO_LIB)
+    # modbus tcp serialport
+   # add_compile_definitions(SAK_IMPORT_MODULE_SERIALBUS)
+   # add_compile_definitions(SAK_IMPORT_MODULE_SERIALPORT)
+
+   # add_compile_definitions(SAK_IMPORT_MODULE_UDP_CLIENT)
+   # add_compile_definitions(SAK_IMPORT_MODULE_UDP)
+
+
+    #add_compile_definitions(SAK_IMPORT_MODULE_TCP_SERVER)
+   # add_compile_definitions(SAK_IMPORT_MODULE_TCP_CLIENT)
+   # add_compile_definitions(SAK_IMPORT_MODULE_TCP)
+   # add_compile_definitions(SAK_IMPORT_MODULE_TCP_CLIENT)
+
+   # add_compile_definitions(SAK_IMPORT_MODULE_WEBSOCKET)
+   # add_compile_definitions(SAK_IMPORT_MODULE_WEBSOCKET_CLIENT)
+   # add_compile_definitions(SAK_IMPORT_MODULE_WEBSOCKET_SERVER)
+
+   # add_compile_definitions(SAK_IMPORT_MODULE_TEST)
+   # add_compile_definitions(SAK_IMPORT_MODULE_TESTLIB)
+
+   # add_compile_definitions(SAK_HOST_ADDRESS_ANY=\"\\\"Any\\\"\")
+ add_subdirectory(${CMAKE_SOURCE_DIR}/thridtool/taoQucik_t/3rdparty/TaoCommon/src/TaoCommon ${CMAKE_SOURCE_DIR}/build/3rdparty/TaoCommon)
 
   include(taoQuick)
 
@@ -43,8 +64,8 @@ include(taoVersion)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS      Core gui Quick Qml printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core gui Quick Qml printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS      Core gui Quick Qml network printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core gui Quick Qml network printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -61,6 +82,10 @@ include_directories(
     thridtool/QCustomPlot/qcustomplotapi
  thridtool/QCustomPlot/qcustomplot/Anvedi
   thridtool/QCustomPlot/qcustomplot/Anvedi/qml-lib
+   thridtool/Qmodbus/src/modbus/client/
+   thridtool/Qmodbus/src/modbus/common/
+   thridtool/Qmodbus/src/modbus/server/
+  #  thridtool/Qmodbus/src/Qmdcommon/
     )
 file(GLOB soucres
     "thridtool/framelesswindow_all/*cpp"
@@ -68,6 +93,11 @@ file(GLOB soucres
       "thridtool/QCustomPlot/qcustomplotapi/*cpp"
      "thridtool/QCustomPlot/qcustomplot/Anvedi/*cpp"
       "thridtool/QCustomPlot/qcustomplot/Anvedi/qml-lib/*cpp"
+
+      "thridtool/Qmodbus/src/modbus/client/*cc"
+      "thridtool/Qmodbus/src/modbus/common/*cc"
+      "thridtool/Qmodbus/src/modbus/server/*cc"
+     # "thridtool/Qmodbus/src/Qmdcommon/*cc"
     )
 
 
@@ -80,7 +110,7 @@ file(GLOB soucres
                 ${PROJECT_SOURCES}
                ${soucres}
                ${framlesssrc}
-                 ${TaoQuickRes}
+              #   ${TaoQuickRes}
             )
         else()
 #            add_executable(MyApp ${someSource})
@@ -104,6 +134,8 @@ target_link_libraries(temper_contrl
   PRIVATE Qt${QT_VERSION_MAJOR}::Core
   Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::SerialBus
+   Qt${QT_VERSION_MAJOR}::SerialPort
   Qt${QT_VERSION_MAJOR}::Widgets
    Qt${QT_VERSION_MAJOR}::PrintSupport
+   Qt${QT_VERSION_MAJOR}::Network
   )

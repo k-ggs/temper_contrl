@@ -109,5 +109,6 @@
         <file>Images/Table_Desc_Hovered.png</file>
         <file>Images/Table_Desc.png</file>
         <file>Qml/Temper_Config.qml</file>
+        <file>Qml/CusSlider/CusSlider_Spin_Cls.qml</file>
     </qresource>
 </RCC>
