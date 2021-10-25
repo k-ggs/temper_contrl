@@ -364,3 +364,63 @@ void  TK::releaseBuffer(char*& buf)
 	delete buf;
     buf = nullptr;
 }
+
+/*将浮点数f转化为4个字节数据存放在byte[4]中*/
+
+unsigned char* TK::Float_to_Byte(float f)
+{
+   // float float_data = 0;
+    unsigned long longdata = 0;
+    longdata = *(unsigned long*)&f;           //注意，会丢失精度
+    unsigned char *byte=new unsigned char[4];
+    byte[0] = (longdata & 0xFF000000) >> 24;
+    byte[1] = (longdata & 0x00FF0000) >> 16;
+    byte[2] = (longdata & 0x0000FF00) >> 8;
+    byte[3] = (longdata & 0x000000FF);
+    return byte;
+}
+
+/*将4个字节数据byte[4]转化为浮点数存放在*f中*/
+
+float TK::Byte_to_Float(unsigned char *p)
+{
+    float float_data=0;
+    unsigned long longdata = 0;
+    longdata = (*p<< 24) + (*(p+1) << 16) + (*(p + 2) << 8) + (*(p + 3) << 0);
+    float_data = *(float*)&longdata;
+    return float_data;
+}
+
+
+/*将浮点数f转化为4个字节数据存放在byte[4]中*/
+ char *TK::float_to_char(float f,  char *s)      //输入的float型数据，输出char存放地址
+{
+     union change
+    {
+        float d;
+         char dat[4];
+    }r1;
+
+        r1.d = f;
+        *s = r1.dat[0];
+        *(s + 1) = r1.dat[1];
+        *(s + 2) = r1.dat[2];
+        *(s + 3) = r1.dat[3];
+        return s;
+}
+float TK::char_to_float( char *s)   //输入char存放地址
+{
+    float f;
+    union change
+      {
+          float d;
+          char dat[4];
+      }r1;
+
+     r1.dat[0] = *s;
+     r1.dat[1]= *(s+1);
+     r1.dat[2] = *(s +2);
+     r1.dat[3] = *(s + 3);
+     f = r1.d;
+     return f;
+}

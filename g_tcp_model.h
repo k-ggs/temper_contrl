@@ -9,12 +9,12 @@ class g_tcp_model:public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(double tem1 READ tem1 WRITE setTem1 NOTIFY tem1Changed)
-    Q_PROPERTY(double tem2 READ tem2 WRITE setTem2 NOTIFY tem2Changed)
-    Q_PROPERTY(double tem3 READ tem3 WRITE setTem3 NOTIFY tem3Changed)
-    Q_PROPERTY(double tem4 READ tem4 WRITE setTem4 NOTIFY tem4Changed)
-    Q_PROPERTY(double tem5 READ tem5 WRITE setTem5 NOTIFY tem5Changed)
-    Q_PROPERTY(double tem6 READ tem6 WRITE setTem6 NOTIFY tem6Changed)
+    Q_PROPERTY(float tem1 READ tem1 WRITE setTem1 NOTIFY tem1Changed)
+    Q_PROPERTY(float tem2 READ tem2 WRITE setTem2 NOTIFY tem2Changed)
+    Q_PROPERTY(float tem3 READ tem3 WRITE setTem3 NOTIFY tem3Changed)
+    Q_PROPERTY(float tem4 READ tem4 WRITE setTem4 NOTIFY tem4Changed)
+    Q_PROPERTY(float tem5 READ tem5 WRITE setTem5 NOTIFY tem5Changed)
+    Q_PROPERTY(float tem6 READ tem6 WRITE setTem6 NOTIFY tem6Changed)
 
 
     Q_PROPERTY(bool b1 READ b1 WRITE setB1 NOTIFY b1Changed)
@@ -29,12 +29,12 @@ public:
     g_tcp_model(QObject *parent=nullptr);
     ~g_tcp_model();
 
-    double tem1()const{return _tem1;}
-    double tem2()const{return _tem2;}
-    double tem3()const{return _tem3;}
-    double tem4()const{return _tem4;}
-    double tem5()const{return _tem5;}
-    double tem6()const{return _tem6;}
+    float tem1()const{return _tem1;}
+    float tem2()const{return _tem2;}
+    float tem3()const{return _tem3;}
+    float tem4()const{return _tem4;}
+    float tem5()const{return _tem5;}
+    float tem6()const{return _tem6;}
 
      bool b1() const{return _b1;}
      bool b2() const{return _b2;}
@@ -45,12 +45,12 @@ public:
 
  public slots:
 
-     void setTem1(double d);
-     void setTem2(double d);
-     void setTem3(double d);
-     void setTem4(double d);
-     void setTem5(double d);
-     void setTem6(double d);
+     void setTem1(float d);
+     void setTem2(float d);
+     void setTem3(float d);
+     void setTem4(float d);
+     void setTem5(float d);
+     void setTem6(float d);
 
      void setB1(bool d);
      void setB2(bool d);
@@ -63,12 +63,12 @@ public:
 
     signals:
 
-    void tem1Changed(double d);
-    void tem2Changed(double d);
-    void tem3Changed(double d);
-    void tem4Changed(double d);
-    void tem5Changed(double d);
-    void tem6Changed(double d);
+    void tem1Changed(float d);
+    void tem2Changed(float d);
+    void tem3Changed(float d);
+    void tem4Changed(float d);
+    void tem5Changed(float d);
+    void tem6Changed(float d);
 
     void b1Changed(bool d);
     void b2Changed(bool d);
@@ -77,12 +77,12 @@ public:
     void b5Changed(bool d);
     void b6Changed(bool d);
 private:
-    double _tem1=0;
-    double _tem2=0;
-    double _tem3=0;
-    double _tem4=0;
-    double _tem5=0;
-    double _tem6=0;
+    float _tem1=0;
+    float _tem2=0;
+    float _tem3=0;
+    float _tem4=0;
+    float _tem5=0;
+    float _tem6=0;
 
 
     bool _b1=false;
