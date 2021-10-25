@@ -11,6 +11,16 @@
 #include "Trans/Trans.h"
 #include"qcustom_api.h"
 #include"RegisterAll.h"
+
+#include"UdpClientModel.h"
+#include "TcpServerModel.h"
+#include "UdpServerModel.h"
+#include "notepadmodel.h"
+#include "TcpClientModel.h"
+
+#include"ini_wr.h"
+
+#include "JsonFormat.h"
 #ifdef QMAKE_GEN_TAOMACRO
     #include "taoMacro.h"
 #endif
@@ -34,8 +44,46 @@ Logger::initLog();
       qmlRegisterType<TaoFrameLessView>("FramelessWindow", 1, 0, "TaoFramelessWindow");
     qmlRegisterType<qcustom_api>("custom_plot", 1, 0, "Qcustom");
 
+    qmlRegisterType<TcpServerModel>("src.tcpservermodel", 1, 0, "TcpServerModel");
+    qmlRegisterType<UdpClientModel>("src.UdpclientModel", 1, 0, "UdpClientModel");
+    qmlRegisterType<TcpClientModel>("src.tcpclientmodel", 1, 0, "TcpClientModel");
+  //qmlRegisterType<JsonFormat>("src.jsonformat",1,0,"JsonFormat");
+  qmlRegisterUncreatableType<TreeItem>("src.treeitem",1,0,"TreeItem","Reference only");
+   qmlRegisterUncreatableType<LogMessageModel>("src.logmessagedata",1,0,"LogMessageData","Reference only");
+
+  QFile file(QGuiApplication::applicationDirPath()+ "/ini.json");
+
+  if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+
+  {
+
+      qDebug()<<"Can't open the file!"<<endl;
+
+  }
+  QString displayString;
+  while(!file.atEnd())
+
+  {
+
+      QByteArray line = file.readLine();
+
+      QString str(line);
+
+      qDebug()<< str;
+
+      displayString.append(str);
+
+  }
+  JsonFormat Json;
+  Json.checkJonsStr(displayString);
+  Json.convertJsonToTreeModel(displayString);
+  //Json.jsonModel().
+
+  iniwr->readdefault();
 
 
+    engine.rootContext()->setContextProperty("iniwr", iniwr);
+    engine.rootContext()->setContextProperty("gtcpmodel", gtcpmodel);
 
     engine.rootContext()->setContextProperty("imgPath", imgPath);
 
@@ -45,8 +93,10 @@ Logger::initLog();
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+
 //engine.addImportPath(qmlPath);
- //   engine.addImportPath(qmlPath);
+//engine.addImportPath(qmlPath);
+
     engine.addImportPath(TaoQuickImportPath);
     engine.rootContext()->setContextProperty("taoQuickImagePath", TaoQuickImagePath);
     engine.load(url);

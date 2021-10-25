@@ -64,8 +64,8 @@ include(taoVersion)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS      Core gui Quick Qml network printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core gui Quick Qml network printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS      websockets bluetooth  multimedia  Core gui Quick Qml network printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS websockets bluetooth  multimedia Core gui Quick Qml network printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -86,8 +86,29 @@ include_directories(
    thridtool/Qmodbus/src/modbus/common/
    thridtool/Qmodbus/src/modbus/server/
   #  thridtool/Qmodbus/src/Qmdcommon/
+
+  protocols/src
+  protocols/SSokit
+  protocols/G_tool
+ # protocols/SeialprotTCPUDP/
+ # protocols/src/debugger/device
+ # protocols/Modbus/client
+ # protocols/Modbus/common
+#  protocols/Modbus/server
+
+ # protocols/Serialports
+
+ # protocols/TCP/client
+ # protocols/TCP/server
+
+#  protocols/UDP/client
+#  protocols/UDP/server
+
+#  protocols/WebSocket/client
+#  protocols/WebSocket/server
     )
 file(GLOB soucres
+    "*cpp"
     "thridtool/framelesswindow_all/*cpp"
     "thridtool/QCustomPlot/qcustomplot/*cpp"
       "thridtool/QCustomPlot/qcustomplotapi/*cpp"
@@ -101,6 +122,28 @@ file(GLOB soucres
     )
 
 
+file( GLOB protocol_src
+    protocols/SSokit/*cpp
+    protocols/G_tool/*cpp
+  #  protocols/SeialprotTCPUDP/*cpp
+ #   protocols/src/debugger/device
+    protocols/src/*cc
+ #   protocols/Modbus/client/*cpp
+#    protocols/Modbus/common/*cpp
+#    protocols/Modbus/server/*cpp
+
+#    protocols/Serialports/*cpp
+
+ #   protocols/TCP/client/*cpp
+ #   protocols/TCP/server/*cpp
+
+  #  protocols/UDP/client/*cpp
+  #  protocols/UDP/server/*cpp
+
+  #  protocols/WebSocket/client/*cpp
+  #  protocols/WebSocket/server/*cpp
+    )
+
 
         if (CMAKE_BUILD_TYPE MATCHES "Release")
           #  add_executable(MyApp ${someSource} ${TaoQuickRes})
@@ -110,15 +153,17 @@ file(GLOB soucres
                 ${PROJECT_SOURCES}
                ${soucres}
                ${framlesssrc}
+               ${protocol_src}
               #   ${TaoQuickRes}
             )
         else()
 #            add_executable(MyApp ${someSource})
              add_executable(temper_contrl
-              ${PROJECT_SOURCES}
-               ${soucres}
+                ${PROJECT_SOURCES}
+                ${soucres}
                 ${framlesssrc}
-                   ${TaoCommonFiles}
+                ${TaoCommonFiles}
+                 ${protocol_src}
             )
         endif()
 
@@ -138,4 +183,8 @@ target_link_libraries(temper_contrl
   Qt${QT_VERSION_MAJOR}::Widgets
    Qt${QT_VERSION_MAJOR}::PrintSupport
    Qt${QT_VERSION_MAJOR}::Network
+   Qt${QT_VERSION_MAJOR}::Multimedia
+    Qt${QT_VERSION_MAJOR}::Bluetooth
+    # Qt${QT_VERSION_MAJOR}::Sql
+    Qt${QT_VERSION_MAJOR}::WebSockets
   )

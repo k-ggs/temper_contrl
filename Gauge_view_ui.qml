@@ -7,7 +7,7 @@ import QtQuick.Extras 1.4
 import QtQml.Models 2.3
 import"./Tao_custom_Qml/instrument"
 import"./TaoQuick"
-
+import src.tcpclientmodel 1.0
 
     Rectangle{
         id:contenplot
@@ -16,6 +16,12 @@ import"./TaoQuick"
            color:  CusConfig.backgroundColor
   // Layout.preferredHeight:content.height*0.3
  //  Layout.preferredWidth : content.width*0.5
+
+           TcpClientModel{
+           id:tcpc
+
+
+           }
   GridLayout{
       anchors.fill: parent
       anchors.margins:90
@@ -50,8 +56,17 @@ anchors.bottom: parent.bottom
        spacing: 5
      //  anchors.fill: parent
        anchors.horizontalCenter: parent.horizontalCenter
-Switch{
-}
+       CusButton{
+
+           onClicked: {
+
+               if(gtcpmodel.b1){
+                 tcpc.send(iniwr.Writestates[0]+"0")
+               }else{
+                 tcpc.send(iniwr.Writestates[0]+"1")
+               }
+                 }
+       }
       CusLabel {
 
 
@@ -61,7 +76,7 @@ Switch{
 
       active: true
 
-      color: valueSource.kph>80?"red":"blue"
+      color: gtcpmodel.b1==false?"red":"blue"
 
 
       }
@@ -79,6 +94,10 @@ Switch{
       CusSlider_Spin
       {width: 300
       anchors.fill: parent
+      onValueChanged: {
+tcpc.send(iniwr.Writetemps[0]+ value.toString())
+
+      }
 
       }
 
@@ -112,7 +131,16 @@ anchors.bottom: parent.bottom
        spacing: 5
      //  anchors.fill: parent
        anchors.horizontalCenter: parent.horizontalCenter
-Switch{
+CusButton{
+
+    onClicked: {
+
+        if(gtcpmodel.b2){
+          tcpc.send(iniwr.Writestates[1]+"0")
+        }else{
+        tcpc.send(iniwr.Writestates[1]+"1")
+        }
+          }
 }
       CusLabel {
 
@@ -123,7 +151,7 @@ Switch{
 
       active: true
 
-      color: valueSource.kph>80?"red":"blue"
+      color:  gtcpmodel.b2==false?"red":"blue"
 
 
       }
@@ -141,7 +169,9 @@ Switch{
       CusSlider_Spin
       {width: 300
       anchors.fill: parent
-
+      onValueChanged: {
+tcpc.send(iniwr.Writetemps[1]+ value.toString())
+}
       }
 
 
@@ -174,8 +204,17 @@ anchors.bottom: parent.bottom
        spacing: 5
      //  anchors.fill: parent
        anchors.horizontalCenter: parent.horizontalCenter
-Switch{
-}
+       CusButton{
+
+           onClicked: {
+
+               if(gtcpmodel.b3){
+                 tcpc.send(iniwr.Writestates[2]+"0")
+               }else{
+               tcpc.send(iniwr.Writestates[2]+"1")
+               }
+                 }
+       }
       CusLabel {
 
 
@@ -185,7 +224,7 @@ Switch{
 
       active: true
 
-      color: valueSource.kph>80?"red":"blue"
+      color:  gtcpmodel.b3==false?"red":"blue"
 
 
       }
@@ -203,7 +242,9 @@ Switch{
       CusSlider_Spin
       {width: 300
       anchors.fill: parent
-
+      onValueChanged: {
+tcpc.send(iniwr.Writetemps[2]+ value.toString())
+}
       }
 
 
@@ -236,8 +277,17 @@ anchors.bottom: parent.bottom
        spacing: 5
      //  anchors.fill: parent
        anchors.horizontalCenter: parent.horizontalCenter
-Switch{
-}
+       CusButton{
+
+           onClicked: {
+
+               if(gtcpmodel.b4){
+                 tcpc.send(iniwr.Writestates[3]+"0")
+               }else{
+               tcpc.send(iniwr.Writestates[3]+"1")
+               }
+                 }
+       }
       CusLabel {
 
 
@@ -247,7 +297,7 @@ Switch{
 
       active: true
 
-      color: valueSource.kph>80?"red":"blue"
+      color:  gtcpmodel.b4==false?"red":"blue"
 
 
       }
@@ -265,7 +315,9 @@ Switch{
       CusSlider_Spin
       {width: 300
       anchors.fill: parent
-
+      onValueChanged: {
+tcpc.send(iniwr.Writetemps[3]+ value.toString())
+}
       }
 
 
@@ -298,8 +350,17 @@ anchors.bottom: parent.bottom
        spacing: 5
      //  anchors.fill: parent
        anchors.horizontalCenter: parent.horizontalCenter
-Switch{
-}
+       CusButton{
+
+           onClicked: {
+
+               if(gtcpmodel.b5){
+                 tcpc.send(iniwr.Writestates[4]+"0")
+               }else{
+               tcpc.send(iniwr.Writestates[4]+"1")
+               }
+                 }
+       }
       CusLabel {
 
 
@@ -309,7 +370,7 @@ Switch{
 
       active: true
 
-      color: valueSource.kph>80?"red":"blue"
+      color:  gtcpmodel.b5==false?"red":"blue"
 
 
       }
@@ -327,7 +388,10 @@ Switch{
       CusSlider_Spin
       {width: 300
       anchors.fill: parent
+      onValueChanged: {
+tcpc.send(iniwr.Writetemps[4]+ value.toString())
 
+      }
       }
 
 
@@ -362,8 +426,17 @@ anchors.bottom: parent.bottom
        spacing: 5
      //  anchors.fill: parent
        anchors.horizontalCenter: parent.horizontalCenter
-Switch{
-}
+       CusButton{
+
+           onClicked: {
+
+               if(gtcpmodel.b6){
+                 tcpc.send(iniwr.Writestates[5]+"0")
+               }else{
+               tcpc.send(iniwr.Writestates[5]+"1")
+               }
+                 }
+       }
       CusLabel {
 
 
@@ -373,7 +446,7 @@ Switch{
 
       active: true
 
-      color: valueSource.kph>80?"red":"blue"
+      color:  gtcpmodel.b6==false?"red":"blue"
 
 
       }
@@ -391,7 +464,10 @@ Switch{
       CusSlider_Spin
       {width: 300
       anchors.fill: parent
+      onValueChanged: {
+tcpc.send(iniwr.Writetemps[5]+ value.toString())
 
+      }
       }
 
 
@@ -408,7 +484,12 @@ Switch{
 
 
   }
+  Component.onCompleted: {
 
+
+
+tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
+  }
 
     }
 

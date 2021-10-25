@@ -11,9 +11,12 @@ import"./TaoQuick"
 Rectangle {
     implicitWidth: 1600
     implicitHeight: 980
+
+
     ValueSource {
-        id: valueSource
+       // id: valueSource
     }
+
     property bool isMaximized : false
 
        ColumnLayout{
@@ -205,12 +208,12 @@ Loader{width: lis.width
                                      // newY2 = Math.cos(xCurr*Math.PI/100.0);
                                 //  newY3 = Math.tan(xCurr*Math.PI/100.0);
                                      xCurr += 1;
-                                   customPlot.addData(0,  xCurr,   valueSource.kph);
-                                   customPlot.addData(1,  xCurr,   valueSource.temperature);
-                                   customPlot.addData(2,  xCurr,  valueSource.kph+ valueSource.rpm);
-                                   customPlot.addData(3,  xCurr,  2* valueSource.rpm);
-                                   customPlot.addData(4,  xCurr,  valueSource.kph+  valueSource.rpm);
-                                   customPlot.addData(5,  xCurr,   valueSource.kph/2+  valueSource.rpm);
+                                  // customPlot.addData(0,  xCurr,   valueSource.kph);
+                                  // customPlot.addData(1,  xCurr,   valueSource.temperature);
+                                 //  customPlot.addData(2,  xCurr,  valueSource.kph+ valueSource.rpm);
+                                 //  customPlot.addData(3,  xCurr,  2* valueSource.rpm);
+                                 //  customPlot.addData(4,  xCurr,  valueSource.kph+  valueSource.rpm);
+                                //   customPlot.addData(5,  xCurr,   valueSource.kph/2+  valueSource.rpm);
                              //    console.log(xCurr)
                               //   }
 
@@ -248,6 +251,7 @@ Loader{width: lis.width
 
 
      customPlot.setRange_tpe( {"lo":-10},2);
+     tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
        }
 
 }
