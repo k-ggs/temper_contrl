@@ -29,7 +29,9 @@ void LogMessageList::addData(LogMessageModel *model)
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_dataList.append(model);
     QString ho=model->host();
+    if(model->isRev()){
     emit data_add(ho,model->buf(),model->length());
+    }
     endInsertRows();
 }
 

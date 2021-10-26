@@ -20,7 +20,7 @@
 
 #include"ini_wr.h"
 
-#include "JsonFormat.h"
+
 #ifdef QMAKE_GEN_TAOMACRO
     #include "taoMacro.h"
 #endif
@@ -51,36 +51,12 @@ Logger::initLog();
   qmlRegisterUncreatableType<TreeItem>("src.treeitem",1,0,"TreeItem","Reference only");
    qmlRegisterUncreatableType<LogMessageModel>("src.logmessagedata",1,0,"LogMessageData","Reference only");
 
-  QFile file(QGuiApplication::applicationDirPath()+ "/ini.json");
 
-  if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
 
-  {
 
-      qDebug()<<"Can't open the file!"<<endl;
 
-  }
-  QString displayString;
-  while(!file.atEnd())
-
-  {
-
-      QByteArray line = file.readLine();
-
-      QString str(line);
-
-      qDebug()<< str;
-
-      displayString.append(str);
-
-  }
-  JsonFormat Json;
-  Json.checkJonsStr(displayString);
-  Json.convertJsonToTreeModel(displayString);
-  //Json.jsonModel().
-
-  iniwr->readdefault();
-
+// iniwr->readdefault();
+ iniwr->readdefault_json();
 
     engine.rootContext()->setContextProperty("iniwr", iniwr);
     engine.rootContext()->setContextProperty("gtcpmodel", gtcpmodel);

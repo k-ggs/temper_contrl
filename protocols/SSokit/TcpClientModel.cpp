@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by saka on 2019-02-28.
 //
 
@@ -38,6 +38,7 @@ void TcpClientModel::sendToDst(const QByteArray &bin) {
     char * src=TK::createBuffer(srcLen,MAXBUFFER);
     qDebug()<<bin<<"+++++"<<src;
     memcpy(src,bin.data(),srcLen);
+     qDebug()<<bin<<"+++++"<<src;
     qint64 writeLen = 0;
     qint64 ioLen = m_tcp_socket.write(src, srcLen);
     while (ioLen > 0) {

@@ -21,8 +21,11 @@ public:
 
     //static unsigned char byte[4];
     static const char* hextab;
+     static const char* hextab2;
     static QString ascii2hex(const QString& src, QVector<uint>& posmap, uint& count);
     static QString bin2hex(const char* buf, uint len);
+  static QString bin2hex2(const char* buf, uint len);
+
     static QString bin2ascii(const char* buf, uint len);
     static bool ascii2bin(const QString& src, QByteArray& dst, QString& err);
 
@@ -34,11 +37,14 @@ public:
 
     static QString ipstr(const QHostAddress& addr, quint16 port);
     static QString ipstr(const QHostAddress& addr, quint16 port, bool tcp);
-    static unsigned char* Float_to_Byte(float f);
-    static float Byte_to_Float(unsigned char *p);
+    static  char* Float_to_Byte(float f);
+    static float Byte_to_Float( char *p);
 
     static  char *float_to_char(float f,  char *s);
     static float char_to_float( char *s);
+   static float char_to_float_c( char *s);
+ static void   char2float(char *chrNum, float &fNum);
+static float CharToFloat( char * str);
 };
 
 #endif // __TOOLKIT_H__

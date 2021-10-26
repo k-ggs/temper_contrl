@@ -19,6 +19,13 @@ columnSpacing: 5
 rowSpacing: 5
 property int cslwdt : 300
 
+CusButton{
+text: "保存记录"
+onClicked: {
+gtcpmodel.stop_record()
+}
+}
+/*
 CusSlider_Spin{
     txt:Temper_Config.temp1
     Layout.preferredWidth: root.cslwdt
@@ -57,7 +64,7 @@ CusSlider_Spin{
 
 
 }
-
+*/
 
 }
 

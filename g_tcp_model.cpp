@@ -60,18 +60,91 @@ void g_tcp_model::setB6(bool d){
 }
 void g_tcp_model::Convert_date( QString &host,const char* buf, qint64 length){
 // QString ascData = TK::bin2ascii(buf, static_cast<uint>(length));
-// QString hexData = TK::bin2hex(buf,static_cast<uint>(length));
-// qDebug()<<"ascData"<<ascData;
- //qDebug()<<"hexData"<<hexData;
+//QString hexData = TK::bin2hex2(buf,static_cast<uint>(length));
+
+
  char *data=new char[length];
  strcpy_s(data,length,buf);
+
 if(length>24){
-   // char *t1=new char[4];
-  //  strcpy_s(t1,4,buf);
-  //  memcpy_s(t1,0,buf,4);
-    int i=length-4;
-  char d= *data>>i;
-    setTem1(TK::char_to_float( &d));
-    delete[] data;
+  //QString dt=hexData.left(8);
+ // qDebug()<<dt;
+  //  int i=(length-1)*8-32;
+   // char d= *data>>i;
+ // QByteArray s=dt.toLatin1();
+ // char *d=s.data();
+    setTem1(TK::CharToFloat( data));
+  float tt;
+ // TK::char2float( d,tt);
+//setTem1(tt);
+    qDebug()<<tem1();
+  //  if(record_flags){
+QString ds=QDateTime::currentDateTime().toString("yyyyMMddhhmmss")+","+QString::number( _tem1,'f')+","+QString::number( _tem2,'f')+","+QString::number( _tem3,'f')+","+QString::number( _tem4,'f')+","+QString::number( _tem5,'f')+","+QString::number( _tem6,'f')+"\n";
+
+
+    record.append(ds);
+   // }
+
 }
+ // delete[] data;
+}
+void g_tcp_model::start_record(){
+
+    record_flags=true;
+
+}
+void g_tcp_model::stop_record(){
+    record_flags=false;
+    if(record.isEmpty()){
+        return;
+    }
+QString dr= QCoreApplication::applicationDirPath()+"/record/";
+QString fl= QCoreApplication::applicationDirPath()+"/record/"+QDateTime::currentDateTime().toString("yyyyMMddhhmmss")+".csv";
+    QDir d1(dr);
+
+    if(!d1.exists())
+    {
+        d1.mkpath(dr);
+
+
+    }
+
+
+
+     QFile file(fl);
+     if(!file.exists())
+     {
+         if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
+              {
+                  qDebug()<<"打开失败";
+             }
+
+
+     }
+     QTextStream in(&file);
+     in<< QString("t")<<","
+
+         <<QString("t1")<<","
+         <<QString("t2")<<","
+         <<QString("t3")<<","
+         <<QString("t4")<<","
+
+         <<QString("t5")<<","
+
+        <<QString("t")<<"\n";
+
+     for(int i=0;i<record.length();i++)
+     {
+         in<<record[i];
+
+
+
+
+
+
+
+     }
+     file.close();
+
+
 }

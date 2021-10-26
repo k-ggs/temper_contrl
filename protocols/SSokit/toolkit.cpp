@@ -28,7 +28,7 @@ QString TK::ipstr(const QHostAddress& addr, quint16 port, bool tcp)
 
 
 const char* TK::hextab = "0123456789ABCDEF";
-
+const char* TK::hextab2 = "FEDCBA9876543210";
 #define TOHEXSTR(v, c, tab) \
 		if (v) { \
 			*c++ = tab[(v>>4)&0xF]; \
@@ -202,6 +202,39 @@ QString TK::bin2hex(const char* buf, uint len)
 	return res;
 }
 
+
+
+QString TK::bin2hex2(const char* buf, uint len)
+{
+    char* tmp = new char[len * 3 + 3];
+
+    const char* s = buf;
+    const char* e = buf + len;
+    char* d = tmp;
+
+    if (s && d)
+    {
+
+
+        while (s < e)
+        {
+            char c = *s++;
+            *d++ = hextab[(c>>4)&0xF];
+            *d++ = hextab[c & 0xF];
+         //   *d++ = ' ';
+        }
+
+
+        *d = 0;
+    }
+
+    QString res(tmp);
+
+    delete[] tmp;
+
+    return res;
+}
+
 QString TK::bin2ascii(const char* buf, uint len)
 {
 	char* tmp = new char[len + 1];
@@ -367,12 +400,12 @@ void  TK::releaseBuffer(char*& buf)
 
 /*将浮点数f转化为4个字节数据存放在byte[4]中*/
 
-unsigned char* TK::Float_to_Byte(float f)
+ char* TK::Float_to_Byte(float f)
 {
    // float float_data = 0;
-    unsigned long longdata = 0;
-    longdata = *(unsigned long*)&f;           //注意，会丢失精度
-    unsigned char *byte=new unsigned char[4];
+     long longdata = 0;
+    longdata = *( long*)&f;           //注意，会丢失精度
+     char *byte=new  char[4];
     byte[0] = (longdata & 0xFF000000) >> 24;
     byte[1] = (longdata & 0x00FF0000) >> 16;
     byte[2] = (longdata & 0x0000FF00) >> 8;
@@ -382,11 +415,12 @@ unsigned char* TK::Float_to_Byte(float f)
 
 /*将4个字节数据byte[4]转化为浮点数存放在*f中*/
 
-float TK::Byte_to_Float(unsigned char *p)
+float TK::Byte_to_Float( char *p)
 {
     float float_data=0;
-    unsigned long longdata = 0;
+     long longdata = 0;
     longdata = (*p<< 24) + (*(p+1) << 16) + (*(p + 2) << 8) + (*(p + 3) << 0);
+   //  longdata =(*(p + 3)<< 0)+(*(p + 2) << 8) +(*(p+1) << 16) + (*p<< 24);
     float_data = *(float*)&longdata;
     return float_data;
 }
@@ -408,6 +442,8 @@ float TK::Byte_to_Float(unsigned char *p)
         *(s + 3) = r1.dat[3];
         return s;
 }
+
+
 float TK::char_to_float( char *s)   //输入char存放地址
 {
     float f;
@@ -423,4 +459,80 @@ float TK::char_to_float( char *s)   //输入char存放地址
      r1.dat[3] = *(s + 3);
      f = r1.d;
      return f;
+}
+float TK::char_to_float_c( char *s)   //输入char存放地址
+{
+    float f;
+    union change
+      {
+          float d;
+          char dat[4];
+      }r1;
+
+     r1.dat[3] = *s;
+     r1.dat[2]= *(s+1);
+     r1.dat[1] = *(s +2);
+     r1.dat[0] = *(s + 3);
+     f = r1.d;
+     return f;
+}
+
+float TK::CharToFloat( char * str)
+{
+    float float_v = 1.0; //最终值
+    //得到int值
+    int int_v = 0;
+    int_v |= (str[0] << 0);
+    int_v |= (str[1] << 8);
+    int_v |= (str[2] << 16);
+    int_v |= (str[3] << 24);
+    //获取二进制表示
+    char *binary_v = new char[32];
+    for( int i = 31; i>=0; i--)
+    {
+        if(int_v % 2 == 1)
+        {
+            binary_v[i] = '1';
+        }
+        else
+        {
+            binary_v[i] = '0';
+        }
+        int_v /= 2;
+    }
+    //获取尾数
+    double m = 1.0; //尾数值
+    double bitn = 1.0;  //尾数部分每一位的值
+    for(int i = 9; i <= 31; ++i)
+    {
+        bitn /= 2.0;
+        if(binary_v[i] == '1')
+        {
+            m += bitn;
+        }
+    }
+    //获取指数
+    int e = -127;
+    int bite = 1;
+    for(int i = 8; i >= 1; --i)
+    {
+        if(binary_v[i] == '1')
+        {
+            e += bite;
+        }
+        bite *= 2;
+    }
+    int value_e = 1;
+    while(e--)
+    {
+        value_e *= 2;
+    }
+    //得到无符号的float_v，尾数部分*指数部分
+    float_v = value_e * m;
+    //获取符号位
+    if(binary_v[0] == '1')
+        float_v *= -1;
+
+    delete [] binary_v;
+    return float_v;
 }

@@ -1,4 +1,4 @@
-#include "JsonFormat.h"
+﻿#include "JsonFormat.h"
 #include <QDebug>
 
 JsonFormat::JsonFormat(QObject *parent)

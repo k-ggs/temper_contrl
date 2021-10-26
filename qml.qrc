@@ -7,5 +7,6 @@
         <file>Plot_view_ui.qml</file>
         <file>Contral_ui.qml</file>
         <file>G_CircularGauge_ui.qml</file>
+        <file>G_Slider_Spin.qml</file>
     </qresource>
 </RCC>

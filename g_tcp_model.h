@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include "toolkit.h"
+#include<QDir>
+#include<QFile>
+#include<QCoreApplication>
+#include<QDateTime>
 class g_tcp_model;
 extern g_tcp_model *gtcpmodel;
 class g_tcp_model:public QObject
@@ -61,6 +65,9 @@ public:
 
      void Convert_date( QString &host,const char* buf, qint64 length);
 
+     void start_record();
+     void stop_record();
+
     signals:
 
     void tem1Changed(float d);
@@ -91,6 +98,10 @@ private:
     bool _b4=false;
     bool _b5=false;
     bool _b6=false;
+
+    bool record_flags=false;
+
+    QVector<QString> record;
 };
 
 #endif // G_TCP_MODEL_H

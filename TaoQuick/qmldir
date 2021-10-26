@@ -36,7 +36,7 @@ CusTriangleTipBorder 1.0 Qml/CusPopup/CusTriangleTipBorder.qml
 CusScrollBar 1.0 Qml/CusScroll/CusScrollBar.qml
 CusSlider_Spin 1.0 Qml/CusSlider/CusSlider_Spin.qml
 CusSlider 1.0 Qml/CusSlider/CusSlider.qml
-CusSlider_Spin_Cls 1.0 Qml/CusSlider/CusSlider_Spin_Cls.qml
+
 CusSpinBox_HourMinute 1.0 Qml/CusSpinBox/CusSpinBox_HourMinute.qml
 CusSpinBox 1.0 Qml/CusSpinBox/CusSpinBox.qml
 singleton CusTableConstant 1.0 Qml/CusTable/CusTableConstant.qml

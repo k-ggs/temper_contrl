@@ -1,4 +1,4 @@
-#ifndef JSONFORMAT_H
+﻿#ifndef JSONFORMAT_H
 #define JSONFORMAT_H
 
 #include <QObject>
@@ -37,12 +37,12 @@ public:
 
     void parseJsonObject(TreeItem * parentItem,QJsonObject *jsonValue);
     void parseJsonArray(TreeItem * parentItem,QJsonArray *jsonValue);
-
+ TreeItem *rootItem;
 protected:
     QHash<int,QByteArray> roleNames() const;
 
 private:
-    TreeItem *rootItem;
+
 };
 
 

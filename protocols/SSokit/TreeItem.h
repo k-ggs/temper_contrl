@@ -1,4 +1,4 @@
-#ifndef TREEITEM_H
+﻿#ifndef TREEITEM_H
 #define TREEITEM_H
 
 #include <QVariant>
@@ -46,7 +46,7 @@ public:
 
     void setValue(QString value)
     {
-        this->value()=value;
+        this->m_value=value;
     }
 
     int type()
@@ -93,9 +93,13 @@ public:
     void setProperty(QString key,QString value,int type);
     JsonCustomProperty* property();
 
-private:
+
     QVector<TreeItem*> m_childItems;
+
+private:
     QString m_itemData;
+
+
     TreeItem *m_parentItem;
     JsonCustomProperty* m_property;
 };
