@@ -536,3 +536,14 @@ float TK::CharToFloat( char * str)
     delete [] binary_v;
     return float_v;
 }
+bool TK::isLittleEndian()
+{
+    union
+    {
+        short a;
+        char  b;
+    }test;
+    test.a=0x0061;
+    if(test.b=='a') return true;
+    else return false;
+}

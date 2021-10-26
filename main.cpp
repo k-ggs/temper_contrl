@@ -19,13 +19,39 @@
 #include "TcpClientModel.h"
 
 #include"ini_wr.h"
-
-
+#include"g_tcp_model.h"
+#include<QtEndian>
 #ifdef QMAKE_GEN_TAOMACRO
     #include "taoMacro.h"
 #endif
 int main(int argc, char *argv[])
 {
+//X
+    QString bb="428D0000";
+
+    QByteArray b=bb.toLocal8Bit();
+  QByteArray hx1=   QByteArray::fromHex(b);
+    QByteArray b2;
+      b2.append(hx1[3]);
+      b2.append(hx1[2]);
+      b2.append(hx1[1]);
+      b2.append(hx1[0]);
+
+
+qDebug()<<hx1.length();
+ qDebug()<<b2[0]<<b2[1]<<b2[2]<<b2[3];
+ qDebug()<<hx1[0]<<hx1[1]<<hx1[2]<<hx1[3];
+
+
+
+ qDebug()<<b.length();
+ qDebug()<<b;
+ float f1=0.0;
+ memcpy(&f1,b2,sizeof (f1));
+
+ qDebug()<<f1;
+
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif

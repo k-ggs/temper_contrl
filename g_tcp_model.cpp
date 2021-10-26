@@ -61,19 +61,16 @@ void g_tcp_model::setB6(bool d){
 void g_tcp_model::Convert_date( QString &host,const char* buf, qint64 length){
 // QString ascData = TK::bin2ascii(buf, static_cast<uint>(length));
 //QString hexData = TK::bin2hex2(buf,static_cast<uint>(length));
+//   char *data= const_cast<char*>(buf);
 
-
- char *data=new char[length];
- strcpy_s(data,length,buf);
+ //char *data=new char[length+1];
+ //strcpy_s(data,length+1,buf);
+QString bb="428D0000";
 
 if(length>24){
-  //QString dt=hexData.left(8);
- // qDebug()<<dt;
-  //  int i=(length-1)*8-32;
-   // char d= *data>>i;
- // QByteArray s=dt.toLatin1();
- // char *d=s.data();
-    setTem1(TK::CharToFloat( data));
+
+QByteArray b= bb.toLatin1();
+    setTem1(TK::CharToFloat( b.left(4).data()));
   float tt;
  // TK::char2float( d,tt);
 //setTem1(tt);

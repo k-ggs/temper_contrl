@@ -45,6 +45,7 @@ public:
    static float char_to_float_c( char *s);
  static void   char2float(char *chrNum, float &fNum);
 static float CharToFloat( char * str);
+static bool isLittleEndian()  ;
 };
 
 #endif // __TOOLKIT_H__
