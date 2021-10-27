@@ -179,6 +179,7 @@ m_CustomPlot->yAxis->grid()->setVisible(false);
 
 
   connect(m_CustomPlot->yAxis2, SIGNAL(rangeChanged(QCPRange)), m_CustomPlot->yAxis, SLOT(setRange(QCPRange)));
+
   m_CustomPlot->yAxis2->setVisible(true);
 
    updateCustomPlotSize();

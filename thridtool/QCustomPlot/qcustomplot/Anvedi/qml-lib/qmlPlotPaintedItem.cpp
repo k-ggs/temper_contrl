@@ -10,6 +10,9 @@ qmlPlotPaintedItem::qmlPlotPaintedItem(QQuickItem* parent) : QQuickPaintedItem(p
 	setAcceptedMouseButtons(Qt::AllButtons);
 
 	connect(this, &QQuickPaintedItem::widthChanged, this, &qmlPlotPaintedItem::onUpdateCustomPlotSize);
+
+    connect(m_CustomPlot.yAxis2, SIGNAL(rangeChanged(QCPRange)), m_CustomPlot.yAxis, SLOT(setRange(QCPRange)));
+
 	connect(this, &QQuickPaintedItem::heightChanged, this, &qmlPlotPaintedItem::onUpdateCustomPlotSize);
 
 	m_CustomPlot.setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
@@ -25,7 +28,8 @@ qmlPlotPaintedItem::qmlPlotPaintedItem(QQuickItem* parent) : QQuickPaintedItem(p
    // m_CustomPlot.xAxis->setSubTicks(false);
    // m_CustomPlot.yAxis2->setSubTicks(false);
    // m_CustomPlot.yAxis->grid()->setVisible(false);
-   // m_CustomPlot.yAxis->setVisible(false);
+    m_CustomPlot.yAxis->setVisible(false);
+
      m_CustomPlot.yAxis2->setVisible(true);
 }
 
@@ -48,21 +52,24 @@ void qmlPlotPaintedItem::addData(int index, QVariantList x, QVariantList y)
 void qmlPlotPaintedItem::addData(int index, qreal x, qreal  y)
 {
     auto g = m_CustomPlot.graph(index);
-    //QVector<qreal> xx, yy;
-    //for (auto i = 0; i < x.size(); ++i)
-    //{
-    //	xx.push_back(x[i].toReal());
-    //	yy.push_back(y[i].toReal());
-    //      m_listInfo.m_graphs[index]->Tag->updatePosition(y[i].toReal());
-    //    m_listInfo.m_graphs[index]->Tag->setText(QString::number(y[i].toReal(), 'f', 2));
-    //}
+
     g->addData(x, y);
 
-        m_listInfo.m_graphs[index]->Tag->updatePosition(y);
-        m_listInfo.m_graphs[index]->Tag->setText(QString::number(y, 'f', 2));
-    g->rescaleAxes();
-   //     qDebug()<<"addData_single";
-    m_CustomPlot.replot();
+
+
+
+
+
+    m_CustomPlot.xAxis->rescale();
+   g->rescaleValueAxis(true, true);
+
+   m_CustomPlot.xAxis->setRange(m_CustomPlot.xAxis->range().upper, 100, Qt::AlignRight);
+
+   double graph1Value =g->dataMainValue(g->dataCount()-1);
+
+   m_listInfo.m_graphs[index]->Tag->updatePosition(graph1Value);
+   m_listInfo.m_graphs[index]->Tag->setText(QString::number(graph1Value, 'f', 2));
+ m_CustomPlot.replot();
 }
 
 
@@ -304,6 +311,7 @@ void qmlPlotPaintedItem::appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph 
 
     //show tag
     if(pdt->istagVisible()){
+        /*
         if(m_CustomPlot.graphCount()<=0){
       auto  graph = m_CustomPlot.addGraph(
            makeAxis(m_CustomPlot.xAxis, QCPAxis::atBottom, pdt->getXAxis()),
@@ -311,6 +319,7 @@ void qmlPlotPaintedItem::appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph 
  m_CustomPlot.axisRect()->axis(QCPAxis::atRight,0)->setPadding(90);
 
        graph->setName(pdt->getName());
+       qDebug()<< pdt->getName();
        graph->setPen(pdt->getPen()->getPen());
        graph->setLineStyle(pdt->getLineStyle());
 
@@ -323,14 +332,16 @@ void qmlPlotPaintedItem::appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph 
             graph->setScatterStyle(scatterInfo->getStyle());
         }
 
-            }else{
+            }else
+        */
+        {
             m_CustomPlot.axisRect()->addAxis(QCPAxis::atRight);
         //     m_CustomPlot.axisRect()->axis(QCPAxis::atRight,m_CustomPlot.graphCount())->setVisible(false);
             auto  graph = m_CustomPlot.addGraph(
                  makeAxis(m_CustomPlot.xAxis, QCPAxis::atBottom, pdt->getXAxis()),
             m_CustomPlot.axisRect()->axis(QCPAxis::atRight,m_CustomPlot.graphCount()));
  m_CustomPlot.axisRect()->axis(QCPAxis::atRight,m_CustomPlot.graphCount()-1)->setPadding(90); //
-
+ m_CustomPlot.axisRect()->axis(QCPAxis::atRight,m_CustomPlot.graphCount()-1)->setRange(0,90);
              graph->setName(pdt->getName());
              graph->setPen(pdt->getPen()->getPen());
              graph->setLineStyle(pdt->getLineStyle());

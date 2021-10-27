@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <QObject>
 
 class qmlLabel;
@@ -23,6 +23,6 @@ public:
 private:
 	qmlLabel* label = nullptr;
 	qmlTick* tick = nullptr;
-    bool default1 = true;
+    bool default1 = false;
 	bool visible = true;
 };

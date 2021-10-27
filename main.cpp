@@ -27,6 +27,7 @@
 int main(int argc, char *argv[])
 {
 //X
+   #ifndef QT_NO_DEBUG
     QString bb="428D0000";
 
     QByteArray b=bb.toLocal8Bit();
@@ -50,7 +51,7 @@ qDebug()<<hx1.length();
  memcpy(&f1,b2,sizeof (f1));
 
  qDebug()<<f1;
-
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -81,8 +82,8 @@ Logger::initLog();
 
 
 
-// iniwr->readdefault();
- iniwr->readdefault_json();
+ iniwr->readdefault();
+ //iniwr->readdefault_json();
 
     engine.rootContext()->setContextProperty("iniwr", iniwr);
     engine.rootContext()->setContextProperty("gtcpmodel", gtcpmodel);

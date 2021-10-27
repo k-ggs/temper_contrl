@@ -21,10 +21,10 @@ public:
 
     //static unsigned char byte[4];
     static const char* hextab;
-     static const char* hextab2;
+    static const char* hextab2;
     static QString ascii2hex(const QString& src, QVector<uint>& posmap, uint& count);
     static QString bin2hex(const char* buf, uint len);
-  static QString bin2hex2(const char* buf, uint len);
+    static QString bin2hex2(const char* buf, uint len);
 
     static QString bin2ascii(const char* buf, uint len);
     static bool ascii2bin(const QString& src, QByteArray& dst, QString& err);
@@ -42,10 +42,12 @@ public:
 
     static  char *float_to_char(float f,  char *s);
     static float char_to_float( char *s);
-   static float char_to_float_c( char *s);
- static void   char2float(char *chrNum, float &fNum);
-static float CharToFloat( char * str);
-static bool isLittleEndian()  ;
+    static float char_to_float_c( char *s);
+    static void   char2float(char *chrNum, float &fNum);
+    static float CharToFloat( char * str);
+    static bool isLittleEndian()  ;
+
+   static void Float2QBytearry(QByteArray &b,float d,bool bigEndian =true );
 };
 
 #endif // __TOOLKIT_H__

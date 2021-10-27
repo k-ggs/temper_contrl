@@ -8,5 +8,6 @@
         <file>Contral_ui.qml</file>
         <file>G_CircularGauge_ui.qml</file>
         <file>G_Slider_Spin.qml</file>
+        <file>G_gauge.qml</file>
     </qresource>
 </RCC>

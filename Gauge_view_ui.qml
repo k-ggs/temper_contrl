@@ -13,7 +13,7 @@ import src.tcpclientmodel 1.0
         id:contenplot
         anchors.fill: parent
 
-           color:  CusConfig.backgroundColor
+          // color:  CusConfig.controlBorderColor
   // Layout.preferredHeight:content.height*0.3
  //  Layout.preferredWidth : content.width*0.5
 
@@ -34,507 +34,143 @@ import src.tcpclientmodel 1.0
    Layout.topMargin: 10
 
       columns:3
-      columnSpacing: 10
+      columnSpacing: 0
       rowSpacing:100
 
+G_gauge{
+    id:g1
+    title: Temper_Config.temp1
+    value: gtcpmodel.tem1
 
-      CircularGauge{
-          Layout.fillHeight: true
-          Layout.fillWidth: true
-      value:gtcpmodel.tem1
-         property int  xx: 0
-      onValueChanged: {
-          xx++
-          customPlot.addData(0,xx,gtcpmodel.tem1)
-          customPlot.addData(1,xx,gtcpmodel.tem2)
-          customPlot.addData(2,xx,gtcpmodel.tem3)
-          customPlot.addData(3,xx,gtcpmodel.tem4)
-          customPlot.addData(4,xx,gtcpmodel.tem5)
+    opened:gtcpmodel.b1
+    onSw_open: {
+ sendmsg()
+    }
+    onSw_close: {
+ sendmsg()
+    }
+    onSendd: {
+sendmsg()
+    }
 
-          customPlot.addData(5,xx,gtcpmodel.tem6)
-
-      }
-
-      style: DashboardGaugeStyle{
-      txt_Unit: qsTr("℃")
-      }
-         ColumnLayout{
-anchors.bottom: parent.bottom
-
-    anchors.top: parent.bottom
-    anchors.topMargin:0
-      Rectangle{
-
-
-          height: CusConfig.fixedHeight
-        //  width:parent.width
-          color:CusConfig.controlBorderColor
-          //border.color: CusConfig.controlBorderColor
-          anchors.horizontalCenter: parent.horizontalCenter
-
-          RowLayout{
-       spacing: 5
-     //  anchors.fill: parent
-       anchors.horizontalCenter: parent.horizontalCenter
-       Switch{
-//checked: gtcpmodel.b1
-           onCheckedChanged: {
-
-           if(gtcpmodel.b1){
-                 tcpc.send(iniwr.Writestates[0]+"0")
-           checked=true
-           }else{
-           checked=false
-                 tcpc.send(iniwr.Writestates[0]+"1")
-
-           }
-           }
-           /*
-           onClicked: {
-  //console.log(iniwr.Writestates[0])
-               if(gtcpmodel.b1){
-
-                 tcpc.send(iniwr.Writestates[0]+"0")
-               }else{
-                 tcpc.send(iniwr.Writestates[0]+"1")
-               }
-                 }
-           */
-       }
-      CusLabel {
-
-
-          text: Temper_Config.temp1
-      }
-      StatusIndicator{
-
-      active: true
-
-      color: gtcpmodel.b1==false?"red":"blue"
-
-
-      }
-          }
-
-      }
-      Rectangle{
-         // anchors.left: parent.right
-           height: parent.height
-          width: 300
-
-          color:CusConfig.themeColor
-
-
-      G_Slider_Spin
-      {width: 300
-      anchors.fill: parent
-      from:0
-      to:iniwr.tempmax
-      value: iniwr.defaulttemp
-    divv:iniwr.defaultdeva
-onSend: {
-tcpc.send(iniwr.Writetemps[0]+ value.toString())
-tcpc.send(iniwr.Writedeviation[0]+ divv.toString())
+    Layout.fillHeight: true
+    Layout.fillWidth: true
 }
-      }
+G_gauge{
+      id:g2
+
+    title: Temper_Config.temp2
+    value: gtcpmodel.tem2
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    onSw_open: {
+ sendmsg()
+    }
+    onSw_close: {
+ sendmsg()
+    }
+    onSendd: {
+sendmsg()
+    }
 
 
-      }
+
 }
+G_gauge{
+      id:g3
+    title: Temper_Config.temp3
+     value: gtcpmodel.tem3
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    onSw_open: {
+ sendmsg()
+    }
+    onSw_close: {
+ sendmsg()
+    }
+    onSendd: {
+sendmsg()
+    }
+
 }
+G_gauge{
+    id:g4
+    title: Temper_Config.temp4
+     value: gtcpmodel.tem4
+    Layout.fillHeight: true
 
-      CircularGauge{
-          Layout.fillHeight: true
-          Layout.fillWidth: true
-      value: gtcpmodel.tem2
-      style: DashboardGaugeStyle{
-      txt_Unit: qsTr("℃")
-      }
-ColumnLayout{
-anchors.bottom: parent.bottom
+    Layout.fillWidth: true
+    onSw_open: {
+ sendmsg()
+    }
+    onSw_close: {
+ sendmsg()
+    }
+    onSendd: {
+sendmsg()
+    }
 
-    anchors.top: parent.bottom
-    anchors.topMargin:0
-      Rectangle{
-
-
-          height: CusConfig.fixedHeight
-        //  width:parent.width
-          color:CusConfig.controlBorderColor
-          //border.color: CusConfig.controlBorderColor
-          anchors.horizontalCenter: parent.horizontalCenter
-
-          RowLayout{
-       spacing: 5
-     //  anchors.fill: parent
-       anchors.horizontalCenter: parent.horizontalCenter
-CusButton{
-
-    onClicked: {
-
-        if(gtcpmodel.b2){
-          tcpc.send(iniwr.Writestates[1]+"0")
-        }else{
-        tcpc.send(iniwr.Writestates[1]+"1")
-        }
-          }
 }
-      CusLabel {
+G_gauge{
+    id:g5
+    title: Temper_Config.temp5
+     value: gtcpmodel.tem5
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    onSw_open: {
+ sendmsg()
+    }
+    onSw_close: {
+ sendmsg()
+    }
+    onSendd: {
+sendmsg()
+    }
 
-
-          text: Temper_Config.temp1
-      }
-      StatusIndicator{
-
-      active: true
-
-      color:  gtcpmodel.b2==false?"red":"blue"
-
-
-      }
-          }
-
-      }
-      Rectangle{
-         // anchors.left: parent.right
-           height: parent.height
-          width: 300
-
-          color:CusConfig.themeColor
-
-
-      G_Slider_Spin
-      {width: 300
-      anchors.fill: parent
-      from:0
-      to:iniwr.tempmax
-      onValueChanged: {
-tcpc.send(iniwr.Writetemps[1]+ value.toString())
 }
-      }
+G_gauge{
+    id:g6
+    title: Temper_Config.temp6
+    value: gtcpmodel.tem6
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    onSw_open: {
+ sendmsg()
+    }
+    onSw_close: {
+ sendmsg()
+    }
+    onSendd: {
+sendmsg()
+    }
 
-
-      }
-}
-}
-
-      CircularGauge{
-          Layout.fillHeight: true
-          Layout.fillWidth: true
-      value: gtcpmodel.tem3
-      style: DashboardGaugeStyle{
-      txt_Unit: qsTr("℃")
-      }
-ColumnLayout{
-anchors.bottom: parent.bottom
-
-    anchors.top: parent.bottom
-    anchors.topMargin:0
-      Rectangle{
-
-
-          height: CusConfig.fixedHeight
-        //  width:parent.width
-          color:CusConfig.controlBorderColor
-          //border.color: CusConfig.controlBorderColor
-          anchors.horizontalCenter: parent.horizontalCenter
-
-          RowLayout{
-       spacing: 5
-     //  anchors.fill: parent
-       anchors.horizontalCenter: parent.horizontalCenter
-       CusButton{
-
-           onClicked: {
-
-               if(gtcpmodel.b3){
-                 tcpc.send(iniwr.Writestates[2]+"0")
-               }else{
-               tcpc.send(iniwr.Writestates[2]+"1")
-               }
-                 }
-       }
-      CusLabel {
-
-
-          text: Temper_Config.temp1
-      }
-      StatusIndicator{
-
-      active: true
-
-      color:  gtcpmodel.b3==false?"red":"blue"
-
-
-      }
-          }
-
-      }
-      Rectangle{
-         // anchors.left: parent.right
-           height: parent.height
-          width: 300
-
-          color:CusConfig.themeColor
-
-
-      G_Slider_Spin
-      {width: 300
-      anchors.fill: parent
-      from:0
-      to:iniwr.tempmax
-      onValueChanged: {
-tcpc.send(iniwr.Writetemps[2]+ value.toString())
-}
-      }
-
-
-      }
-}
-}
-
-      CircularGauge{
-          Layout.fillHeight: true
-          Layout.fillWidth: true
-      value: gtcpmodel.tem4
-      style: DashboardGaugeStyle{
-      txt_Unit: qsTr("℃")
-      }
-ColumnLayout{
-anchors.bottom: parent.bottom
-
-    anchors.top: parent.bottom
-    anchors.topMargin:0
-      Rectangle{
-
-
-          height: CusConfig.fixedHeight
-        //  width:parent.width
-          color:CusConfig.controlBorderColor
-          //border.color: CusConfig.controlBorderColor
-          anchors.horizontalCenter: parent.horizontalCenter
-
-          RowLayout{
-       spacing: 5
-     //  anchors.fill: parent
-       anchors.horizontalCenter: parent.horizontalCenter
-       CusButton{
-
-           onClicked: {
-
-               if(gtcpmodel.b4){
-                 tcpc.send(iniwr.Writestates[3]+"0")
-               }else{
-               tcpc.send(iniwr.Writestates[3]+"1")
-               }
-                 }
-       }
-      CusLabel {
-
-
-          text: Temper_Config.temp1
-      }
-      StatusIndicator{
-
-      active: true
-
-      color:  gtcpmodel.b4==false?"red":"blue"
-
-
-      }
-          }
-
-      }
-      Rectangle{
-         // anchors.left: parent.right
-           height: parent.height
-          width: 300
-
-          color:CusConfig.themeColor
-
-
-      G_Slider_Spin
-      {width: 300
-      anchors.fill: parent
-      from:0
-      to:iniwr.tempmax
-      onValueChanged: {
-tcpc.send(iniwr.Writetemps[3]+ value.toString())
-}
-      }
-
-
-      }
-}
-}
-
-      CircularGauge{
-          Layout.fillHeight: true
-          Layout.fillWidth: true
-      value: gtcpmodel.tem5
-      style: DashboardGaugeStyle{
-      txt_Unit: qsTr("℃")
-      }
-ColumnLayout{
-anchors.bottom: parent.bottom
-
-    anchors.top: parent.bottom
-    anchors.topMargin:0
-      Rectangle{
-
-
-          height: CusConfig.fixedHeight
-        //  width:parent.width
-          color:CusConfig.controlBorderColor
-          //border.color: CusConfig.controlBorderColor
-          anchors.horizontalCenter: parent.horizontalCenter
-
-          RowLayout{
-       spacing: 5
-     //  anchors.fill: parent
-       anchors.horizontalCenter: parent.horizontalCenter
-       CusButton{
-
-           onClicked: {
-
-               if(gtcpmodel.b5){
-                 tcpc.send(iniwr.Writestates[4]+"0")
-               }else{
-               tcpc.send(iniwr.Writestates[4]+"1")
-               }
-                 }
-       }
-      CusLabel {
-
-
-          text: Temper_Config.temp1
-      }
-      StatusIndicator{
-
-      active: true
-
-      color:  gtcpmodel.b5==false?"red":"blue"
-
-
-      }
-          }
-
-      }
-      Rectangle{
-         // anchors.left: parent.right
-           height: parent.height
-          width: 300
-
-          color:CusConfig.themeColor
-
-
-      G_Slider_Spin
-      {width: 300
-      anchors.fill: parent
-      from:0
-      to:iniwr.tempmax
-      onValueChanged: {
-tcpc.send(iniwr.Writetemps[4]+ value.toString())
-
-      }
-      }
-
-
-      }
-}
-}
-
-      CircularGauge{
-      Layout.fillHeight: true
-      Layout.fillWidth: true
-    //  implicitWidth: 300
-    //  implicitHeight: 300
-      value: gtcpmodel.tem6
-      style: DashboardGaugeStyle{
-      txt_Unit: qsTr("℃")
-      }
-ColumnLayout{
-anchors.bottom: parent.bottom
-
-    anchors.top: parent.bottom
-    anchors.topMargin:0
-      Rectangle{
-
-
-          height: CusConfig.fixedHeight
-        //  width:parent.width
-          color:CusConfig.controlBorderColor
-          //border.color: CusConfig.controlBorderColor
-          anchors.horizontalCenter: parent.horizontalCenter
-
-          RowLayout{
-       spacing: 5
-     //  anchors.fill: parent
-       anchors.horizontalCenter: parent.horizontalCenter
-       CusButton{
-
-           onClicked: {
-
-               if(gtcpmodel.b6){
-                 tcpc.send(iniwr.Writestates[5]+"0")
-               }else{
-               tcpc.send(iniwr.Writestates[5]+"1")
-               }
-                 }
-       }
-      CusLabel {
-
-
-          text: Temper_Config.temp1
-      }
-      StatusIndicator{
-
-      active: true
-
-      color:  gtcpmodel.b6==false?"red":"blue"
-
-
-      }
-          }
-
-      }
-      Rectangle{
-         // anchors.left: parent.right
-           height: parent.height
-          width: 300
-
-          color:CusConfig.themeColor
-
-
-      G_Slider_Spin
-      {width: 300
-      anchors.fill: parent
-      from:0
-      to:iniwr.tempmax
-      onValueChanged: {
-tcpc.send(iniwr.Writetemps[5]+ value.toString())
-
-      }
-      }
-
-
-      }
-}
 }
 
 
+Timer{
 
+repeat: true
+running: true
+interval: 500
+  property int  xx: 0
+onTriggered: {
+    xx++
+    customPlot.addData(0,xx,gtcpmodel.tem1)
+    customPlot.addData(1,xx,gtcpmodel.tem2)
+    customPlot.addData(2,xx,gtcpmodel.tem3)
+    customPlot.addData(3,xx,gtcpmodel.tem4)
+    customPlot.addData(4,xx,gtcpmodel.tem5)
 
-
-
-
+    customPlot.addData(5,xx,gtcpmodel.tem6)
+}
+}
 
 
   }
 
            Rectangle{
                     Layout.fillWidth: true
-                    Layout.preferredHeight:parent.height*0.3
+                    Layout.preferredHeight:parent.height*0.2
                     color:CusConfig.CusConfig.backgroundColor
 
                     CustomPlotItem{
@@ -567,7 +203,8 @@ tcpc.send(iniwr.Writetemps[5]+ value.toString())
                                              }
                                          }
                                          yAxis : Axis
-                                         { visible : false
+                                         {
+                                            // visible:false
                                              label : Label {
                                                  text : "sin"
                                                  font : "helvetica,-1,8,5,0,0,0,0,0,0"
@@ -598,7 +235,7 @@ tcpc.send(iniwr.Writetemps[5]+ value.toString())
                             ,
                            Graph {
                                   name :"温度4"
-                                 pen : Pen { color : "green"; width : 1.0 }
+                                 pen : Pen { color : "yellow"; width : 1.0 }
                                   xAxis : Axis {
                                   useDefault : true
 
@@ -608,7 +245,7 @@ tcpc.send(iniwr.Writetemps[5]+ value.toString())
                             ,
                            Graph {
                              name : "温度5"
-                             pen : Pen { color : "green"; width : 1.0 }
+                             pen : Pen { color : Qt.black; width : 1.0 }
                              xAxis : Axis {
                              useDefault : true
 
@@ -618,7 +255,7 @@ tcpc.send(iniwr.Writetemps[5]+ value.toString())
                            ,
                            Graph {
                              name : "温度6"
-                            pen : Pen { color : "green"; width : 1.0 }
+                            pen : Pen { color : "#98A9EE"; width : 1.0 }
                              xAxis : Axis {
                               useDefault : true
 
@@ -633,15 +270,60 @@ tcpc.send(iniwr.Writetemps[5]+ value.toString())
                              }
 
                 }
-
+Rectangle{
+    Layout.fillWidth: true
+    Layout.preferredHeight:parent.height*0.1
+    color:CusConfig.CusConfig.backgroundColor
+    RowLayout{
+    anchors.fill: parent
+    CusButton{
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+    text: "保存记录"
+    onClicked: {
+    gtcpmodel.stop_record()
+    }
+    }
+    CusButton{
+        id:allbt
+        property string msg: "00"
+        textColor: "red"
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+    text: "温度全开"
+    onClicked: {
+        msg="01"
+ //   gtcpmodel.stop_record()
+    }
+    }
+    }
+}
       }
            Component.onCompleted: {
 
 
-customPlot.setRange_tpe( {"lo":0,"up":100},2);
+//customPlot.setRange_tpe( {"lo":0,"up":100},2);
 tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
   }
 
+
+
+    function  appenddata(){
+
+
+    }
+    function sendmsg(){
+
+
+       var str=allbt.msg+"#"+
+       g1.swh+"#"+g2.swh+"#"+g3.swh+"#"+g4.swh+"#"+g5.swh+"#"+g6.swh+"#"+
+       g1.temperature+"#"+g2.temperature+"#"+g3.temperature+"#"+g4.temperature+"#"+g5.temperature+"#"+g6.temperature+"#"+
+       g1.dev+"#"+g2.dev+"#"+g3.dev+"#"+g4.dev+"#"+g5.dev+"#"+g6.dev
+console.log((str))
+        console.log(gtcpmodel.str2hex(str))
+     // tcpc.write(gtcpmodel.str2tobyte(str))
+tcpc.send(gtcpmodel.str2hex(str))
+    }
     }
 
 

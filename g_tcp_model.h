@@ -67,7 +67,8 @@ public:
 
      void start_record();
      void stop_record();
-
+    QString str2hex(QString value);
+    QByteArray str2tobyte(QString value);
     signals:
 
     void tem1Changed(float d);

@@ -59,31 +59,86 @@ void g_tcp_model::setB6(bool d){
     emit b6Changed(d);
 }
 void g_tcp_model::Convert_date( QString &host,const char* buf, qint64 length){
-// QString ascData = TK::bin2ascii(buf, static_cast<uint>(length));
-//QString hexData = TK::bin2hex2(buf,static_cast<uint>(length));
-//   char *data= const_cast<char*>(buf);
 
- //char *data=new char[length+1];
- //strcpy_s(data,length+1,buf);
-QString bb="428D0000";
 
-if(length>24){
+if(buf){
+QByteArray b(buf,length);//size!
+//b.resize(length);
 
-QByteArray b= bb.toLatin1();
-    setTem1(TK::CharToFloat( b.left(4).data()));
-  float tt;
- // TK::char2float( d,tt);
-//setTem1(tt);
-    qDebug()<<tem1();
-  //  if(record_flags){
-QString ds=QDateTime::currentDateTime().toString("yyyyMMddhhmmss")+","+QString::number( _tem1,'f')+","+QString::number( _tem2,'f')+","+QString::number( _tem3,'f')+","+QString::number( _tem4,'f')+","+QString::number( _tem5,'f')+","+QString::number( _tem6,'f')+"\n";
+//qDebug()<<"buf size"<<b.length();
+//qDebug()<<"buf size"<<b;
+
+int R_datalen=6;
+int R_boolLen=1;
+int byte_len=4;
+int R_tlen=R_datalen*byte_len;
+QByteArray Qtemp=b.left(R_tlen);
+ float ft[6];
+for(int i=0;i<R_datalen;i++){
+
+    QByteArray temp;
+
+    if(TK::isLittleEndian()){
+
+        temp.append(Qtemp[i*4+3]);
+         temp.append(Qtemp[i*4+2]);
+          temp.append(Qtemp[i*4+1]);
+           temp.append(Qtemp[i*4+0]);
+
+           float f=0.0;
+           memcpy(&f,temp,sizeof (f));
+           if(abs(f)<1||abs(f)>1000){
+               f=0.0;
+           }
+           ft[i]=f;
+    }else{
+
+        temp.append(Qtemp[i*4+0]);
+         temp.append(Qtemp[i*4+1]);
+          temp.append(Qtemp[i*4+2]);
+           temp.append(Qtemp[i*4+3]);
+
+           float f=0.0;
+           memcpy(&f,temp,sizeof (f));
+          if(abs(f)<1||abs(f)>1000){
+               f=0.0;
+           }
+           ft[i]=f;
+
+    }
+
+}
+//qDebug()<<b.length();
+//qDebug()<<b.toHex();
+char boolt=b[R_datalen*4];
+
+bool bl[8];
+
+memcpy(&bl,&boolt,sizeof (bl));
+QString dc= QString("%1").arg(QString::number(boolt,2),sizeof (boolt)*8,'0');
+
+setTem1(ft[0]);
+setTem2(ft[1]);
+setTem3(ft[2]);
+setTem4(ft[3]);
+setTem5(ft[4]);
+setTem6(ft[5]);
+//qDebug()<<"dc"<<dc;
+//qDebug()<<"Tem"<<_tem1<<_tem2<<_tem3<<_tem4<<_tem5<<_tem6;
+setB1(dc.at(0)==1?true:false);
+setB2(dc.at(1)==1?true:false);
+setB3(dc.at(2)==1?true:false);
+setB4(dc.at(3)==1?true:false);
+setB5(dc.at(4)==1?true:false);
+setB6(dc.at(5)==1?true:false);
+QString ds=QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz")+","+QString::number( _tem1,'f')+","+QString::number( _tem2,'f')+","+QString::number( _tem3,'f')+","+QString::number( _tem4,'f')+","+QString::number( _tem5,'f')+","+QString::number( _tem6,'f')+"\n";
 
 
     record.append(ds);
-   // }
+  
 
 }
- // delete[] data;
+
 }
 void g_tcp_model::start_record(){
 
@@ -143,5 +198,146 @@ QString fl= QCoreApplication::applicationDirPath()+"/record/"+QDateTime::current
      }
      file.close();
 
+
+}
+
+QString g_tcp_model::str2hex(QString value){
+
+
+QStringList das=value.split('#');
+if(value.length()<19){
+
+    qDebug()<<"长度不足";
+}
+QString hex_all0= das[0];
+
+QString hex_b1= das[1];
+QString hex_b2= das[2];
+QString hex_b3= das[3];
+QString hex_b4= das[4];
+QString hex_b5= das[5];
+QString hex_b6= das[6];
+
+//float fb1= das[7].toFloat();
+//float fb3= das[7].toFloat();
+//float fb4= das[7].toFloat();
+//float fb5= das[7].toFloat();
+//float fb6= das[7].toFloat();
+//float fb7= das[7].toFloat();
+
+QByteArray b1;
+QByteArray b2;
+QByteArray b3;
+QByteArray b4;
+QByteArray b5;
+QByteArray b6;
+ TK::Float2QBytearry(b1,das[7].toFloat(),false);
+ TK::Float2QBytearry(b2,das[8].toFloat(),false);
+ TK::Float2QBytearry(b3,das[9].toFloat(),false);
+ TK::Float2QBytearry(b4,das[10].toFloat(),false);
+ TK::Float2QBytearry(b5,das[11].toFloat(),false);
+ TK::Float2QBytearry(b6,das[12].toFloat(),false);
+
+QByteArray d1;
+QByteArray d2;
+QByteArray d3;
+QByteArray d4;
+QByteArray d5;
+QByteArray d6;
+TK::Float2QBytearry(d1,das[13].toFloat(),false);
+TK::Float2QBytearry(d2,das[14].toFloat(),false);
+TK::Float2QBytearry(d3,das[15].toFloat(),false);
+TK::Float2QBytearry(d4,das[16].toFloat(),false);
+TK::Float2QBytearry(d5,das[17].toFloat(),false);
+TK::Float2QBytearry(d6,das[18].toFloat(),false);
+
+QString hex_f1=  b1.toHex();
+QString hex_f2=  b2.toHex();
+QString hex_f3=  b3.toHex();
+QString hex_f4=  b4.toHex();
+QString hex_f5=  b5.toHex();
+QString hex_f6=  b6.toHex();
+
+QString hex_df1= d1.toHex();
+QString hex_df2= d2.toHex();
+QString hex_df3= d3.toHex();
+QString hex_df4= d4.toHex();
+QString hex_df5= d5.toHex();
+QString hex_df6= d6.toHex();
+
+return hex_all0+
+        hex_b1+hex_b2+hex_b3+hex_b4+hex_b5+hex_b6+
+        hex_f1+hex_f2+hex_f3+hex_f4+hex_f5+hex_f6;
+       // hex_df1+hex_df2+hex_df3+hex_df4+hex_df5+hex_df6;
+
+}
+QByteArray g_tcp_model::str2tobyte(QString value){
+
+
+QStringList das=value.split('#');
+if(value.length()<19){
+
+    qDebug()<<"长度不足";
+}
+QString hex_all0= das[0];
+
+QString hex_b1= das[1];
+QString hex_b2= das[2];
+QString hex_b3= das[3];
+QString hex_b4= das[4];
+QString hex_b5= das[5];
+QString hex_b6= das[6];
+
+//float fb1= das[7].toFloat();
+//float fb3= das[7].toFloat();
+//float fb4= das[7].toFloat();
+//float fb5= das[7].toFloat();
+//float fb6= das[7].toFloat();
+//float fb7= das[7].toFloat();
+
+QByteArray b1;
+QByteArray b2;
+QByteArray b3;
+QByteArray b4;
+QByteArray b5;
+QByteArray b6;
+ TK::Float2QBytearry(b1,das[7].toFloat(),false);
+ TK::Float2QBytearry(b2,das[8].toFloat(),false);
+ TK::Float2QBytearry(b3,das[9].toFloat(),false);
+ TK::Float2QBytearry(b4,das[10].toFloat(),false);
+ TK::Float2QBytearry(b5,das[11].toFloat(),false);
+ TK::Float2QBytearry(b6,das[12].toFloat(),false);
+
+QByteArray d1;
+QByteArray d2;
+QByteArray d3;
+QByteArray d4;
+QByteArray d5;
+QByteArray d6;
+TK::Float2QBytearry(d1,das[13].toFloat(),false);
+TK::Float2QBytearry(d2,das[14].toFloat(),false);
+TK::Float2QBytearry(d3,das[15].toFloat(),false);
+TK::Float2QBytearry(d4,das[16].toFloat(),false);
+TK::Float2QBytearry(d5,das[17].toFloat(),false);
+TK::Float2QBytearry(d6,das[18].toFloat(),false);
+
+QString hex_f1=  b1.toHex();
+QString hex_f2=  b2.toHex();
+QString hex_f3=  b3.toHex();
+QString hex_f4=  b4.toHex();
+QString hex_f5=  b5.toHex();
+QString hex_f6=  b6.toHex();
+
+QString hex_df1= d1.toHex();
+QString hex_df2= d2.toHex();
+QString hex_df3= d3.toHex();
+QString hex_df4= d4.toHex();
+QString hex_df5= d5.toHex();
+QString hex_df6= d6.toHex();
+QString s=hex_all0+
+        hex_b1+hex_b2+hex_b3+hex_b4+hex_b5+hex_b6+
+        hex_f1+hex_f2+hex_f3+hex_f4+hex_f5+hex_f6+
+        hex_df1+hex_df2+hex_df3+hex_df4+hex_df5+hex_df6;
+return s.toLatin1();
 
 }

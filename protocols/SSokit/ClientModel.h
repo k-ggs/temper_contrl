@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by saka on 2019-02-28.
 //
 
@@ -96,6 +96,7 @@ public slots:
      * @param data
      */
     void send(const QString &data);
+     void write(const QByteArray &bytes) ;
 
     void sendWithHeader(const QString header,const qint32 lengthSize,bool bigEndian, const QString &data);
 

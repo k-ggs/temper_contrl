@@ -62,7 +62,7 @@ Rectangle {
        anchors.fill: parent
        Item {
 
-       Layout.preferredHeight:content.height*0.9
+       Layout.preferredHeight:content.height
        Layout.fillWidth: true
           Layout.margins: 1
 
@@ -105,7 +105,8 @@ Loader{width: lis.width
 
                width: rec_con.width
                height: rec_con.height
-               source: "qrc:/Contral_ui.qml"}
+         //      source: "qrc:/Contral_ui.qml"
+           }
 
            }
 
@@ -121,7 +122,7 @@ Loader{width: lis.width
        }
        Component.onCompleted: {
 
-
+CusConfig.currentTheme=2
      //customPlot.setRange_tpe( {"lo":-10},2);
      //tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
        }

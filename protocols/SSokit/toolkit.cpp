@@ -547,3 +547,24 @@ bool TK::isLittleEndian()
     if(test.b=='a') return true;
     else return false;
 }
+
+
+void TK::Float2QBytearry(QByteArray &b,float d,bool bigEndian ){
+
+
+
+    if (bigEndian){
+
+
+
+            float temp = d;
+            quint8 *ptr = reinterpret_cast<quint8*>(&d);
+            for (int i = 0;i < int(sizeof(d)); i++){
+                ptr[i] = reinterpret_cast<quint8*>(&temp)[int(sizeof(d)) - 1 - i];
+
+        }
+
+}
+     b.append(reinterpret_cast<char*>(&d), sizeof(d));
+
+}

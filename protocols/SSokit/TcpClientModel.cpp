@@ -41,6 +41,7 @@ void TcpClientModel::sendToDst(const QByteArray &bin) {
      qDebug()<<bin<<"+++++"<<src;
     qint64 writeLen = 0;
     qint64 ioLen = m_tcp_socket.write(src, srcLen);
+     qDebug()<<"write"<<ioLen;
     while (ioLen > 0) {
         writeLen += ioLen;
         ioLen = m_tcp_socket.write(src + writeLen, srcLen - writeLen);

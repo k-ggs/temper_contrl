@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by saka on 2019-02-28.
 //
 
@@ -30,7 +30,12 @@ void ClientModel::toggleConnect(bool checked, QString addr, QString port) {
         closeClient();
     }
 }
+void ClientModel::write(const QByteArray &bytes) {
 
+   sendToDst(bytes);
+
+
+}
 void ClientModel::send(const QString &data) {
     QString err;
     QByteArray bin;
