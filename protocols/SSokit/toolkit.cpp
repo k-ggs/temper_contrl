@@ -536,6 +536,7 @@ float TK::CharToFloat( char * str)
     delete [] binary_v;
     return float_v;
 }
+
 bool TK::isLittleEndian()
 {
     union
@@ -567,4 +568,105 @@ void TK::Float2QBytearry(QByteArray &b,float d,bool bigEndian ){
 }
      b.append(reinterpret_cast<char*>(&d), sizeof(d));
 
+}
+
+
+
+QByteArray TK::stringToByteArray(QString &origingString, SAKEnumTextFormatInput format)
+{  // qDebug()<<origingString;
+    QByteArray data;
+    if (format == SAKEnumTextFormatInput::InputFormatBin){
+        QStringList strList = origingString.split(' ');
+        for (int i = 0; i < strList.length(); i++) {
+            QString str = strList.at(i);
+            qint8 value = QString(str).toInt(Q_NULLPTR, 2);
+            data.append(reinterpret_cast<char*>(&value), 1);
+        }
+    }else if (format == SAKEnumTextFormatInput::InputFormatOct){
+        QStringList strList = origingString.split(' ');
+        for (int i = 0; i < strList.length(); i++) {
+            QString str = strList.at(i);
+            qint8 value = QString(str).toInt(Q_NULLPTR, 8);
+            data.append(reinterpret_cast<char*>(&value), 1);
+        }
+    }else if (format == SAKEnumTextFormatInput::InputFormatDec){
+        QStringList strList = origingString.split(' ');
+        for (int i = 0; i < strList.length(); i++) {
+            QString str = strList.at(i);
+            qint8 value = QString(str).toInt(Q_NULLPTR, 10);
+            data.append(reinterpret_cast<char*>(&value), 1);
+        }
+    }else if (format == SAKEnumTextFormatInput::InputFormatHex){
+        QStringList strList = origingString.split(' ');
+        for (int i = 0; i < strList.length(); i++) {
+            QString str = strList.at(i);
+            qint8 value = QString(str).toInt(Q_NULLPTR, 16);
+            data.append(reinterpret_cast<char*>(&value), 1);
+        }
+    }else if (format == SAKEnumTextFormatInput::InputFormatAscii){
+        data = origingString.toLatin1();
+    }else if (format == SAKEnumTextFormatInput::InputFormatLocal){
+        data = origingString.toLocal8Bit();
+    }else {
+        data = origingString.toUtf8();
+        Q_ASSERT_X(false, __FUNCTION__, "Unknown input mode!");
+    }
+
+    return data;
+}
+QString TK::byteArrayToString(QByteArray &origingData,
+                                                  SAKEnumTextFormatOutput format)
+{
+    QString str;
+    if (format == TK::OutputFormatBin){
+        for (int i = 0; i < origingData.length(); i++){
+            str.append(QString("%1 ").arg(
+                           QString::number(static_cast<uint8_t>(origingData.at(i)), 2),
+                           8,
+                           '0'
+                           ));
+        }
+    }else if (format == TK::OutputFormatOct){
+        for (int i = 0; i < origingData.length(); i++){
+            str.append(QString("%1 ").arg(
+                           QString::number(static_cast<uint8_t>(origingData.at(i)), 8),
+                           3,
+                           '0')
+                       );
+        }
+    }else if (format == TK::OutputFormatDec){
+        for (int i = 0; i < origingData.length(); i++){
+            str.append(QString("%1 ").arg(
+                           QString::number(static_cast<uint8_t>(origingData.at(i)), 10)
+                           ));
+        }
+    }else if (format == TK::OutputFormatHex){
+        for (int i = 0; i < origingData.length(); i++){
+            str.append(QString("%1 ").arg(
+                           QString::number(static_cast<uint8_t>(origingData.at(i)), 16),
+                           2,
+                           '0'));
+        }
+    }else if (format == TK::OutputFormatAscii){
+        str.append(QString::fromLatin1(origingData));
+    }else if (format == TK::OutputFormatUtf8){
+        str.append(QString::fromUtf8(origingData));
+    }else if (format == TK::OutputFormatUtf16){
+        str.append(QString::fromUtf16(
+                       reinterpret_cast<const char16_t*>(origingData.constData()),
+                       origingData.length()/sizeof(char16_t)
+                       ));
+    }else if (format == TK::OutputFormatUcs4){
+        str.append(QString::fromUcs4(
+                       reinterpret_cast<const char32_t*>(origingData.constData()),
+                       origingData.length()/sizeof(char32_t)
+                       ));
+    }else if (format == TK::OutputFormatLocal){
+        str.append(QString::fromLocal8Bit(origingData));
+    }else {
+        str.append(QString::fromUtf8(origingData));
+        Q_ASSERT_X(false, __FUNCTION__, "Unknown output mode!");
+    }
+
+    return str;
 }

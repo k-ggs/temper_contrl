@@ -27,30 +27,10 @@
 int main(int argc, char *argv[])
 {
 //X
-   #ifndef QT_NO_DEBUG
-    QString bb="428D0000";
-
-    QByteArray b=bb.toLocal8Bit();
-  QByteArray hx1=   QByteArray::fromHex(b);
-    QByteArray b2;
-      b2.append(hx1[3]);
-      b2.append(hx1[2]);
-      b2.append(hx1[1]);
-      b2.append(hx1[0]);
-
-
-qDebug()<<hx1.length();
- qDebug()<<b2[0]<<b2[1]<<b2[2]<<b2[3];
- qDebug()<<hx1[0]<<hx1[1]<<hx1[2]<<hx1[3];
-
-
-
- qDebug()<<b.length();
- qDebug()<<b;
- float f1=0.0;
- memcpy(&f1,b2,sizeof (f1));
-
- qDebug()<<f1;
+   #if QT_NO_DEBUG
+QString s="00#00#00#00#00#00#00#50#50#50#50#50#50#10#10#10#10#10#10";
+ qDebug()<<  gtcpmodel->str2tobyte(s).length();
+ qDebug()<< gtcpmodel->str2hex(s);
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

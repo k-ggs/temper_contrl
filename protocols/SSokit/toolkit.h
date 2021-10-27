@@ -16,7 +16,29 @@ typedef struct _IPAddr
 class TK
 {
 public:
-
+    // Input text format
+    enum SAKEnumTextFormatInput {
+        InputFormatBin,
+        InputFormatOct,
+        InputFormatDec,
+        InputFormatHex,
+        InputFormatAscii,
+        InputFormatLocal
+    };
+   Q_ENUM(SAKEnumTextFormatInput);
+    // Output text format
+    enum SAKEnumTextFormatOutput {
+        OutputFormatBin,
+        OutputFormatOct,
+        OutputFormatDec,
+        OutputFormatHex,
+        OutputFormatUcs4,
+        OutputFormatUtf8,
+        OutputFormatUtf16,
+        OutputFormatAscii,
+        OutputFormatLocal,
+    };
+    Q_ENUM(SAKEnumTextFormatOutput);
 
 
     //static unsigned char byte[4];
@@ -46,8 +68,10 @@ public:
     static void   char2float(char *chrNum, float &fNum);
     static float CharToFloat( char * str);
     static bool isLittleEndian()  ;
-
+    static QByteArray stringToByteArray(QString &origingString, SAKEnumTextFormatInput format);
    static void Float2QBytearry(QByteArray &b,float d,bool bigEndian =true );
+   QString byteArrayToString(QByteArray &origingData,
+                                                     SAKEnumTextFormatOutput format);
 };
 
 #endif // __TOOLKIT_H__

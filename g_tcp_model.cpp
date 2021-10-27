@@ -201,7 +201,7 @@ QString fl= QCoreApplication::applicationDirPath()+"/record/"+QDateTime::current
 
 }
 
-QString g_tcp_model::str2hex(QString value){
+QByteArray g_tcp_model::str2hex(QString value){
 
 
 QStringList das=value.split('#');
@@ -218,12 +218,23 @@ QString hex_b4= das[4];
 QString hex_b5= das[5];
 QString hex_b6= das[6];
 
-//float fb1= das[7].toFloat();
-//float fb3= das[7].toFloat();
-//float fb4= das[7].toFloat();
-//float fb5= das[7].toFloat();
-//float fb6= das[7].toFloat();
-//float fb7= das[7].toFloat();
+QByteArray hex_b7;
+
+qint8 v1 = QString(hex_all0).toInt(Q_NULLPTR, 16);
+qint8 v2 = QString(hex_b1).toInt(Q_NULLPTR, 16);
+qint8 v3 = QString(hex_b2).toInt(Q_NULLPTR, 16);
+qint8 v4 = QString(hex_b3).toInt(Q_NULLPTR, 16);
+qint8 v5 = QString(hex_b4).toInt(Q_NULLPTR, 16);
+qint8 v6 = QString(hex_b5).toInt(Q_NULLPTR, 16);
+qint8 v7 = QString(hex_b6).toInt(Q_NULLPTR, 16);
+
+hex_b7.append(reinterpret_cast<char*>(&v1),1);
+hex_b7.append(reinterpret_cast<char*>(&v2),1);
+hex_b7.append(reinterpret_cast<char*>(&v3),1);
+hex_b7.append(reinterpret_cast<char*>(&v4),1);
+hex_b7.append(reinterpret_cast<char*>(&v5),1);
+hex_b7.append(reinterpret_cast<char*>(&v6),1);
+hex_b7.append(reinterpret_cast<char*>(&v7),1);
 
 QByteArray b1;
 QByteArray b2;
@@ -251,24 +262,26 @@ TK::Float2QBytearry(d4,das[16].toFloat(),false);
 TK::Float2QBytearry(d5,das[17].toFloat(),false);
 TK::Float2QBytearry(d6,das[18].toFloat(),false);
 
-QString hex_f1=  b1.toHex();
-QString hex_f2=  b2.toHex();
-QString hex_f3=  b3.toHex();
-QString hex_f4=  b4.toHex();
-QString hex_f5=  b5.toHex();
-QString hex_f6=  b6.toHex();
+QByteArray rt;
+rt.append(hex_b7);
 
-QString hex_df1= d1.toHex();
-QString hex_df2= d2.toHex();
-QString hex_df3= d3.toHex();
-QString hex_df4= d4.toHex();
-QString hex_df5= d5.toHex();
-QString hex_df6= d6.toHex();
 
-return hex_all0+
-        hex_b1+hex_b2+hex_b3+hex_b4+hex_b5+hex_b6+
-        hex_f1+hex_f2+hex_f3+hex_f4+hex_f5+hex_f6;
-       // hex_df1+hex_df2+hex_df3+hex_df4+hex_df5+hex_df6;
+
+rt.append(b1);
+rt.append(b2);
+rt.append(b3);
+rt.append(b4);
+rt.append(b5);
+rt.append(b6);
+
+
+rt.append(d1);
+rt.append(d2);
+rt.append(d3);
+rt.append(d4);
+rt.append(d5);
+rt.append(d6);
+return rt;
 
 }
 QByteArray g_tcp_model::str2tobyte(QString value){
@@ -287,13 +300,14 @@ QString hex_b3= das[3];
 QString hex_b4= das[4];
 QString hex_b5= das[5];
 QString hex_b6= das[6];
+//QByteArray hexb1=hex_b1.toLatin1();
+//QByteArray hexb2=hex_b2.toLatin1();
+//QByteArray hexb3=hex_b3.toLatin1();
+//QByteArray hexb4=hex_b4.toLatin1();
+//QByteArray hexb5=hex_b5.toLatin1();
+//QByteArray hexb6=hex_b6.toLatin1();
 
-//float fb1= das[7].toFloat();
-//float fb3= das[7].toFloat();
-//float fb4= das[7].toFloat();
-//float fb5= das[7].toFloat();
-//float fb6= das[7].toFloat();
-//float fb7= das[7].toFloat();
+
 
 QByteArray b1;
 QByteArray b2;
@@ -321,23 +335,27 @@ TK::Float2QBytearry(d4,das[16].toFloat(),false);
 TK::Float2QBytearry(d5,das[17].toFloat(),false);
 TK::Float2QBytearry(d6,das[18].toFloat(),false);
 
-QString hex_f1=  b1.toHex();
-QString hex_f2=  b2.toHex();
-QString hex_f3=  b3.toHex();
-QString hex_f4=  b4.toHex();
-QString hex_f5=  b5.toHex();
-QString hex_f6=  b6.toHex();
+QString hex_f1=  b1.toHex(' ');
+QString hex_f2=  b2.toHex(' ');
+QString hex_f3=  b3.toHex(' ');
+QString hex_f4=  b4.toHex(' ');
+QString hex_f5=  b5.toHex(' ');
+QString hex_f6=  b6.toHex(' ');
 
-QString hex_df1= d1.toHex();
-QString hex_df2= d2.toHex();
-QString hex_df3= d3.toHex();
-QString hex_df4= d4.toHex();
-QString hex_df5= d5.toHex();
-QString hex_df6= d6.toHex();
-QString s=hex_all0+
-        hex_b1+hex_b2+hex_b3+hex_b4+hex_b5+hex_b6+
-        hex_f1+hex_f2+hex_f3+hex_f4+hex_f5+hex_f6+
-        hex_df1+hex_df2+hex_df3+hex_df4+hex_df5+hex_df6;
-return s.toLatin1();
+QString hex_df1= d1.toHex(' ');
+QString hex_df2= d2.toHex(' ');
+QString hex_df3= d3.toHex(' ');
+QString hex_df4= d4.toHex(' ');
+QString hex_df5= d5.toHex(' ');
+QString hex_df6= d6.toHex(' ');
+QString s=hex_all0+' '+
+        hex_b1+' '+hex_b2+' '+hex_b3+' '+hex_b4+' '+hex_b5+' '+hex_b6+' '+
+        hex_f1+' '+hex_f2+' '+hex_f3+' '+hex_f4+' '+hex_f5+' '+hex_f6+' '+
+        hex_df1+' '+hex_df2+' '+hex_df3+' '+hex_df4+' '+hex_df5+' '+hex_df6;
+//qDebug()<<b1;
+//qDebug()<<s.toLocal8Bit();
+QByteArray ar=TK::stringToByteArray(s,TK::InputFormatHex);
+//qDebug()<<ar;
+return ar;
 
 }
