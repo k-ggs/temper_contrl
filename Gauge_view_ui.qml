@@ -321,8 +321,8 @@ tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
        g1.dev+"#"+g2.dev+"#"+g3.dev+"#"+g4.dev+"#"+g5.dev+"#"+g6.dev
 console.log((str))
         console.log(gtcpmodel.str2hex(str))
-     // tcpc.write(gtcpmodel.str2tobyte(str))
-tcpc.send(gtcpmodel.str2hex(str))
+      tcpc.write(gtcpmodel.str2tobyte(str))
+//tcpc.send(gtcpmodel.str2hex(str))
     }
     }
 

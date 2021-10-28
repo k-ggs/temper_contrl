@@ -25,7 +25,7 @@ public:
         InputFormatAscii,
         InputFormatLocal
     };
-   Q_ENUM(SAKEnumTextFormatInput);
+   //Q_ENUM(SAKEnumTextFormatInput);
     // Output text format
     enum SAKEnumTextFormatOutput {
         OutputFormatBin,
@@ -38,7 +38,7 @@ public:
         OutputFormatAscii,
         OutputFormatLocal,
     };
-    Q_ENUM(SAKEnumTextFormatOutput);
+  //  Q_ENUM(SAKEnumTextFormatOutput);
 
 
     //static unsigned char byte[4];
