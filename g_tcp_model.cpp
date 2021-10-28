@@ -108,14 +108,17 @@ for(int i=0;i<R_datalen;i++){
     }
 
 }
-//qDebug()<<b.length();
-//qDebug()<<b.toHex();
+
 char boolt=b[R_datalen*4];
 
-bool bl[8];
 
-memcpy(&bl,&boolt,sizeof (bl));
-QString dc= QString("%1").arg(QString::number(boolt,2),sizeof (boolt)*8,'0');
+QString dc=QString("%1 ").arg(
+                           QString::number(static_cast<uint8_t>(boolt), 2),
+                           8,
+                           '0'
+                           );
+
+
 
 setTem1(ft[0]);
 setTem2(ft[1]);
@@ -123,14 +126,13 @@ setTem3(ft[2]);
 setTem4(ft[3]);
 setTem5(ft[4]);
 setTem6(ft[5]);
-//qDebug()<<"dc"<<dc;
-//qDebug()<<"Tem"<<_tem1<<_tem2<<_tem3<<_tem4<<_tem5<<_tem6;
-setB1(dc.at(0)==1?true:false);
-setB2(dc.at(1)==1?true:false);
-setB3(dc.at(2)==1?true:false);
-setB4(dc.at(3)==1?true:false);
-setB5(dc.at(4)==1?true:false);
-setB6(dc.at(5)==1?true:false);
+
+setB1(dc.at(7)=="1"?true:false);
+setB2(dc.at(6)=="1"?true:false);
+setB3(dc.at(5)=="1"?true:false);
+setB4(dc.at(4)=="1"?true:false);
+setB5(dc.at(3)=="1"?true:false);
+setB6(dc.at(2)=="1"?true:false);
 QString ds=QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz")+","+QString::number( _tem1,'f')+","+QString::number( _tem2,'f')+","+QString::number( _tem3,'f')+","+QString::number( _tem4,'f')+","+QString::number( _tem5,'f')+","+QString::number( _tem6,'f')+"\n";
 
 
@@ -218,7 +220,10 @@ QString hex_b4= das[4];
 QString hex_b5= das[5];
 QString hex_b6= das[6];
 
+QString hex_remc1= das[7];
+
 QByteArray hex_b7;
+QByteArray remc1;
 
 qint8 v1 = QString(hex_all0).toInt(Q_NULLPTR, 16);
 qint8 v2 = QString(hex_b1).toInt(Q_NULLPTR, 16);
@@ -227,6 +232,7 @@ qint8 v4 = QString(hex_b3).toInt(Q_NULLPTR, 16);
 qint8 v5 = QString(hex_b4).toInt(Q_NULLPTR, 16);
 qint8 v6 = QString(hex_b5).toInt(Q_NULLPTR, 16);
 qint8 v7 = QString(hex_b6).toInt(Q_NULLPTR, 16);
+qint8 v8 = QString(hex_remc1).toInt(Q_NULLPTR, 16);
 
 hex_b7.append(reinterpret_cast<char*>(&v1),1);
 hex_b7.append(reinterpret_cast<char*>(&v2),1);
@@ -235,6 +241,7 @@ hex_b7.append(reinterpret_cast<char*>(&v4),1);
 hex_b7.append(reinterpret_cast<char*>(&v5),1);
 hex_b7.append(reinterpret_cast<char*>(&v6),1);
 hex_b7.append(reinterpret_cast<char*>(&v7),1);
+remc1.append(reinterpret_cast<char*>(&v8),1);
 
 QByteArray b1;
 QByteArray b2;
@@ -242,12 +249,12 @@ QByteArray b3;
 QByteArray b4;
 QByteArray b5;
 QByteArray b6;
- TK::Float2QBytearry(b1,das[7].toFloat(),false);
- TK::Float2QBytearry(b2,das[8].toFloat(),false);
- TK::Float2QBytearry(b3,das[9].toFloat(),false);
- TK::Float2QBytearry(b4,das[10].toFloat(),false);
- TK::Float2QBytearry(b5,das[11].toFloat(),false);
- TK::Float2QBytearry(b6,das[12].toFloat(),false);
+ TK::Float2QBytearry(b1,das[8].toFloat(),false);
+ TK::Float2QBytearry(b2,das[9].toFloat(),false);
+ TK::Float2QBytearry(b3,das[10].toFloat(),false);
+ TK::Float2QBytearry(b4,das[11].toFloat(),false);
+ TK::Float2QBytearry(b5,das[12].toFloat(),false);
+ TK::Float2QBytearry(b6,das[13].toFloat(),false);
 
 QByteArray d1;
 QByteArray d2;
@@ -255,12 +262,12 @@ QByteArray d3;
 QByteArray d4;
 QByteArray d5;
 QByteArray d6;
-TK::Float2QBytearry(d1,das[13].toFloat(),false);
-TK::Float2QBytearry(d2,das[14].toFloat(),false);
-TK::Float2QBytearry(d3,das[15].toFloat(),false);
-TK::Float2QBytearry(d4,das[16].toFloat(),false);
-TK::Float2QBytearry(d5,das[17].toFloat(),false);
-TK::Float2QBytearry(d6,das[18].toFloat(),false);
+TK::Float2QBytearry(d1,das[14].toFloat(),false);
+TK::Float2QBytearry(d2,das[15].toFloat(),false);
+TK::Float2QBytearry(d3,das[16].toFloat(),false);
+TK::Float2QBytearry(d4,das[17].toFloat(),false);
+TK::Float2QBytearry(d5,das[18].toFloat(),false);
+TK::Float2QBytearry(d6,das[19].toFloat(),false);
 
 QByteArray rt;
 rt.append(hex_b7);
@@ -300,14 +307,8 @@ QString hex_b3= das[3];
 QString hex_b4= das[4];
 QString hex_b5= das[5];
 QString hex_b6= das[6];
-//QByteArray hexb1=hex_b1.toLatin1();
-//QByteArray hexb2=hex_b2.toLatin1();
-//QByteArray hexb3=hex_b3.toLatin1();
-//QByteArray hexb4=hex_b4.toLatin1();
-//QByteArray hexb5=hex_b5.toLatin1();
-//QByteArray hexb6=hex_b6.toLatin1();
 
-
+QString hex_b7= das[7];
 
 QByteArray b1;
 QByteArray b2;
@@ -315,12 +316,12 @@ QByteArray b3;
 QByteArray b4;
 QByteArray b5;
 QByteArray b6;
- TK::Float2QBytearry(b1,das[7].toFloat(),false);
- TK::Float2QBytearry(b2,das[8].toFloat(),false);
- TK::Float2QBytearry(b3,das[9].toFloat(),false);
- TK::Float2QBytearry(b4,das[10].toFloat(),false);
- TK::Float2QBytearry(b5,das[11].toFloat(),false);
- TK::Float2QBytearry(b6,das[12].toFloat(),false);
+TK::Float2QBytearry(b1,das[8].toFloat(),true);
+TK::Float2QBytearry(b2,das[9].toFloat(),true);
+TK::Float2QBytearry(b3,das[10].toFloat(),true);
+TK::Float2QBytearry(b4,das[11].toFloat(),true);
+TK::Float2QBytearry(b5,das[12].toFloat(),true);
+TK::Float2QBytearry(b6,das[13].toFloat(),true);
 
 QByteArray d1;
 QByteArray d2;
@@ -328,12 +329,12 @@ QByteArray d3;
 QByteArray d4;
 QByteArray d5;
 QByteArray d6;
-TK::Float2QBytearry(d1,das[13].toFloat(),false);
-TK::Float2QBytearry(d2,das[14].toFloat(),false);
-TK::Float2QBytearry(d3,das[15].toFloat(),false);
-TK::Float2QBytearry(d4,das[16].toFloat(),false);
-TK::Float2QBytearry(d5,das[17].toFloat(),false);
-TK::Float2QBytearry(d6,das[18].toFloat(),false);
+TK::Float2QBytearry(d1,das[14].toFloat(),true);
+TK::Float2QBytearry(d2,das[15].toFloat(),true);
+TK::Float2QBytearry(d3,das[16].toFloat(),true);
+TK::Float2QBytearry(d4,das[17].toFloat(),true);
+TK::Float2QBytearry(d5,das[18].toFloat(),true);
+TK::Float2QBytearry(d6,das[19].toFloat(),true);
 
 QString hex_f1=  b1.toHex(' ');
 QString hex_f2=  b2.toHex(' ');
@@ -349,13 +350,13 @@ QString hex_df4= d4.toHex(' ');
 QString hex_df5= d5.toHex(' ');
 QString hex_df6= d6.toHex(' ');
 QString s=hex_all0+' '+
-        hex_b1+' '+hex_b2+' '+hex_b3+' '+hex_b4+' '+hex_b5+' '+hex_b6+' '+
+        hex_b1+' '+hex_b2+' '+hex_b3+' '+hex_b4+' '+hex_b5+' '+hex_b6+' '+hex_b7+' '+
         hex_f1+' '+hex_f2+' '+hex_f3+' '+hex_f4+' '+hex_f5+' '+hex_f6+' '+
         hex_df1+' '+hex_df2+' '+hex_df3+' '+hex_df4+' '+hex_df5+' '+hex_df6;
 //qDebug()<<b1;
-//qDebug()<<s.toLocal8Bit();
+qDebug()<<s;
 QByteArray ar=TK::stringToByteArray(s,TK::InputFormatHex);
-//qDebug()<<ar;
+qDebug()<<ar;
 return ar;
 
 }

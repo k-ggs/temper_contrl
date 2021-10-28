@@ -46,6 +46,10 @@ textColor: "red"
 
             label2.value=slider.to-spinBox.value
             }
+            if(label2.value+spinBox.value<slider.to){
+
+             label2.to=slider.to-spinBox.value
+            }
         }
       ToolTip.text: qsTr("设定的温度")
       ToolTip.visible: hovered

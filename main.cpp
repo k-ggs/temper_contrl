@@ -27,7 +27,7 @@
 int main(int argc, char *argv[])
 {
 //X
-   #if QT_NO_DEBUG
+   #ifndef QT_NO_DEBUG
 QString s="00#00#00#00#00#00#00#50#50#50#50#50#50#10#10#10#10#10#10";
  qDebug()<<  gtcpmodel->str2tobyte(s).length();
  qDebug()<< gtcpmodel->str2hex(s);
@@ -79,9 +79,11 @@ Logger::initLog();
 
 //engine.addImportPath(qmlPath);
 //engine.addImportPath(qmlPath);
-
+//g_tcp_model tcpc;
     engine.addImportPath(TaoQuickImportPath);
     engine.rootContext()->setContextProperty("taoQuickImagePath", TaoQuickImagePath);
+
+  //   engine.rootContext()->setContextProperty("tcpc", &tcpc);
     engine.load(url);
 
     return app.exec();

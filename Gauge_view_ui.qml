@@ -61,6 +61,7 @@ G_gauge{
 
     title: Temper_Config.temp2
     value: gtcpmodel.tem2
+     opened:gtcpmodel.b2
     Layout.fillHeight: true
     Layout.fillWidth: true
     onSw_open: {
@@ -81,6 +82,7 @@ G_gauge{
     title: Temper_Config.temp3
      value: gtcpmodel.tem3
     Layout.fillHeight: true
+     opened:gtcpmodel.b3
     Layout.fillWidth: true
     onSw_open: {
  sendmsg()
@@ -96,6 +98,7 @@ sendmsg()
 G_gauge{
     id:g4
     title: Temper_Config.temp4
+     opened:gtcpmodel.b4
      value: gtcpmodel.tem4
     Layout.fillHeight: true
 
@@ -113,6 +116,7 @@ sendmsg()
 }
 G_gauge{
     id:g5
+     opened:gtcpmodel.b5
     title: Temper_Config.temp5
      value: gtcpmodel.tem5
     Layout.fillHeight: true
@@ -130,6 +134,7 @@ sendmsg()
 }
 G_gauge{
     id:g6
+     opened:gtcpmodel.b6
     title: Temper_Config.temp6
     value: gtcpmodel.tem6
     Layout.fillHeight: true
@@ -271,7 +276,7 @@ onTriggered: {
 
                 }
 Rectangle{
-    Layout.fillWidth: true
+    Layout.preferredWidth: parent.height*0.5
     Layout.preferredHeight:parent.height*0.1
     color:CusConfig.CusConfig.backgroundColor
     RowLayout{
@@ -284,20 +289,50 @@ Rectangle{
     gtcpmodel.stop_record()
     }
     }
-    CusButton{
+    CusSwitch{
         id:allbt
         property string msg: "00"
-        textColor: "red"
+     //   textColor: "red"
         Layout.fillHeight: true
         Layout.fillWidth: true
-    text: "温度全开"
+    text:checked==true? "温度全开":"全开关闭"
     onClicked: {
+        if(checked){
         msg="01"
+        sendmsg()
+        }
+        else{
+         msg="00"
+             sendmsg()
+        }
  //   gtcpmodel.stop_record()
     }
     }
+   CusSwitch{
+   id:remo_c
+   text:checked==true? "远程控制开":"远程控制关"
+   property string rm_c: "01"
+   checked: true
+   onClicked: {
+
+   if(checked){
+       rm_c="01"
+   sendmsg()
+   }
+   if(!checked){
+       rm_c="00"
+   sendmsg()
+   }
+   }
+   }
     }
 }
+      }
+      Component.onDestruction: {
+
+      console.log("destroy")
+
+          sendcloseall()
       }
            Component.onCompleted: {
 
@@ -306,7 +341,12 @@ Rectangle{
 tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
   }
 
+Timer{
+id:det
+interval: 10000
+repeat: false
 
+}
 
     function  appenddata(){
 
@@ -317,12 +357,26 @@ tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
 
        var str=allbt.msg+"#"+
        g1.swh+"#"+g2.swh+"#"+g3.swh+"#"+g4.swh+"#"+g5.swh+"#"+g6.swh+"#"+
+       remo_c.rm_c+"#"+
        g1.temperature+"#"+g2.temperature+"#"+g3.temperature+"#"+g4.temperature+"#"+g5.temperature+"#"+g6.temperature+"#"+
        g1.dev+"#"+g2.dev+"#"+g3.dev+"#"+g4.dev+"#"+g5.dev+"#"+g6.dev
 console.log((str))
         console.log(gtcpmodel.str2hex(str))
       tcpc.write(gtcpmodel.str2tobyte(str))
 //tcpc.send(gtcpmodel.str2hex(str))
+    }
+
+
+    function sendcloseall(){
+        var str="00"+"#"+
+        "00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+
+        "01"+"#"+
+        g1.temperature+"#"+g2.temperature+"#"+g3.temperature+"#"+g4.temperature+"#"+g5.temperature+"#"+g6.temperature+"#"+
+        g1.dev+"#"+g2.dev+"#"+g3.dev+"#"+g4.dev+"#"+g5.dev+"#"+g6.dev
+
+       tcpc.write(gtcpmodel.str2tobyte(str))
+
+        det.start()
     }
     }
 

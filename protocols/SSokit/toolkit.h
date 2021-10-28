@@ -59,19 +59,23 @@ public:
 
     static QString ipstr(const QHostAddress& addr, quint16 port);
     static QString ipstr(const QHostAddress& addr, quint16 port, bool tcp);
-    static  char* Float_to_Byte(float f);
-    static float Byte_to_Float( char *p);
+    static unsigned char* Float_to_Byte(float f);
+    static float Byte_to_Float(unsigned char *p);
 
-    static  char *float_to_char(float f,  char *s);
-    static float char_to_float( char *s);
-    static float char_to_float_c( char *s);
-    static void   char2float(char *chrNum, float &fNum);
-    static float CharToFloat( char * str);
+    static unsigned char *float_to_char(float f,unsigned  char *s);
+    static float char_to_float(unsigned char *s);
+    static float char_to_float_c( unsigned char *s);
+    static void   char2float(unsigned char *chrNum, float &fNum);
+    static float CharToFloat(unsigned char * str);
     static bool isLittleEndian()  ;
     static QByteArray stringToByteArray(QString &origingString, SAKEnumTextFormatInput format);
    static void Float2QBytearry(QByteArray &b,float d,bool bigEndian =true );
-   QString byteArrayToString(QByteArray &origingData,
+  static QString byteArrayToString(QByteArray &origingData,
                                                      SAKEnumTextFormatOutput format);
+   static  char convertCharToHex(char ch);
+  static void  convertStringToHex(const QString &str, QByteArray &byteData);
+
+   static   int  bytesToInt(const QByteArray &bytes,int size = 4 );
 };
 
 #endif // __TOOLKIT_H__

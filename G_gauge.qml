@@ -9,6 +9,7 @@ import"./Tao_custom_Qml/instrument"
 import"./TaoQuick"
 
 Rectangle{
+    id:root
   //  anchors.fill: parent
     property alias title: ttle.text
     property alias value: gauge.value
@@ -19,7 +20,7 @@ Rectangle{
     signal sendd()
     signal sw_open()
     signal sw_close()
-    border.width: 2
+    border.width:1
     color:CusConfig.controlBorderColor
 radius:20
 CircularGauge{
@@ -87,7 +88,7 @@ StatusIndicator{
 
 active: true
 
-color: opened==false?"red":"blue"
+color: root.opened==false?"red":"blue"
 
 
 }

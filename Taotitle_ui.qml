@@ -23,6 +23,12 @@ Rectangle {
         }
     }
     property bool isMaxed: root.isMax
+    Timer{
+    id:det
+    interval: 1000
+    repeat: false
+
+    }
     Row {
         id: controlButtons
         objectName: "controlButtonsRow"
@@ -40,6 +46,7 @@ Rectangle {
                 root.showMinimized()
             }
         }
+
         CusButton_Image {
             width: 24
             height: 24
@@ -66,6 +73,17 @@ Rectangle {
             width: 24
             height: 24
             onClicked: {
+
+                var str="00"+"#"+
+                "00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+
+                "01"+"#"+
+                "00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+
+                "00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"+"#"+"00"
+
+              // tcpc.write(gtcpmodel.str2tobyte(str))
+
+                det.start()
+
                 root.close()
             }
         }
@@ -94,12 +112,14 @@ Rectangle {
             objectName: "skinBtn"
         }
         LangBtn {
+            visible: false
             width: 24
             height: 24
             anchors.verticalCenter: parent.verticalCenter
             objectName: "langBtn"
         }
         CusButton_Image {
+             visible: false
             width: 24
             height: 24
             anchors.verticalCenter: parent.verticalCenter
@@ -111,6 +131,7 @@ Rectangle {
             }
         }
         CusButton_Image {
+             visible: false
             width: 24
             height: 24
             anchors.verticalCenter: parent.verticalCenter

@@ -400,12 +400,12 @@ void  TK::releaseBuffer(char*& buf)
 
 /*将浮点数f转化为4个字节数据存放在byte[4]中*/
 
- char* TK::Float_to_Byte(float f)
+unsigned char* TK::Float_to_Byte(float f)
 {
    // float float_data = 0;
      long longdata = 0;
     longdata = *( long*)&f;           //注意，会丢失精度
-     char *byte=new  char[4];
+    unsigned char *byte=new unsigned char[4];
     byte[0] = (longdata & 0xFF000000) >> 24;
     byte[1] = (longdata & 0x00FF0000) >> 16;
     byte[2] = (longdata & 0x0000FF00) >> 8;
@@ -415,7 +415,7 @@ void  TK::releaseBuffer(char*& buf)
 
 /*将4个字节数据byte[4]转化为浮点数存放在*f中*/
 
-float TK::Byte_to_Float( char *p)
+float TK::Byte_to_Float(unsigned char *p)
 {
     float float_data=0;
      long longdata = 0;
@@ -427,7 +427,7 @@ float TK::Byte_to_Float( char *p)
 
 
 /*将浮点数f转化为4个字节数据存放在byte[4]中*/
- char *TK::float_to_char(float f,  char *s)      //输入的float型数据，输出char存放地址
+unsigned char *TK::float_to_char(float f, unsigned char *s)      //输入的float型数据，输出char存放地址
 {
      union change
     {
@@ -444,13 +444,13 @@ float TK::Byte_to_Float( char *p)
 }
 
 
-float TK::char_to_float( char *s)   //输入char存放地址
+float TK::char_to_float(unsigned char *s)   //输入char存放地址
 {
     float f;
     union change
       {
           float d;
-          char dat[4];
+          unsigned char dat[4];
       }r1;
 
      r1.dat[0] = *s;
@@ -460,13 +460,13 @@ float TK::char_to_float( char *s)   //输入char存放地址
      f = r1.d;
      return f;
 }
-float TK::char_to_float_c( char *s)   //输入char存放地址
+float TK::char_to_float_c(unsigned char *s)   //输入char存放地址
 {
     float f;
     union change
       {
           float d;
-          char dat[4];
+        unsigned  char dat[4];
       }r1;
 
      r1.dat[3] = *s;
@@ -477,7 +477,7 @@ float TK::char_to_float_c( char *s)   //输入char存放地址
      return f;
 }
 
-float TK::CharToFloat( char * str)
+float TK::CharToFloat( unsigned char * str)
 {
     float float_v = 1.0; //最终值
     //得到int值
@@ -487,7 +487,7 @@ float TK::CharToFloat( char * str)
     int_v |= (str[2] << 16);
     int_v |= (str[3] << 24);
     //获取二进制表示
-    char *binary_v = new char[32];
+   unsigned char *binary_v = new unsigned char[32];
     for( int i = 31; i>=0; i--)
     {
         if(int_v % 2 == 1)
@@ -670,3 +670,68 @@ QString TK::byteArrayToString(QByteArray &origingData,
 
     return str;
 }
+void  TK::convertStringToHex(const QString &str, QByteArray &byteData)
+    {
+        int hexdata,lowhexdata;
+        int hexdatalen = 0;
+        int len = str.length();
+        byteData.resize(len/2);
+        char lstr,hstr;
+        for(int i=0; i<len; )
+        {
+            //char lstr,
+            hstr=str[i].toLatin1();
+            if(hstr == ' ')
+            {
+                i++;
+                continue;
+            }
+            i++;
+            if(i >= len)
+                break;
+            lstr = str[i].toLatin1();
+            hexdata = convertCharToHex(hstr);
+            lowhexdata = convertCharToHex(lstr);
+            if((hexdata == 16) || (lowhexdata == 16))
+                break;
+            else
+                hexdata = hexdata*16+lowhexdata;
+            i++;
+            byteData[hexdatalen] = (char)hexdata;
+            hexdatalen++;
+        }
+        byteData.resize(hexdatalen);
+    }
+//另一个 函数 char 转为 16进制
+    char TK::convertCharToHex(char ch)
+    {
+        /*
+        0x30等于十进制的48，48也是0的ASCII值，，
+        1-9的ASCII值是49-57，，所以某一个值－0x30，，
+        就是将字符0-9转换为0-9
+
+        */
+        if((ch >= '0') && (ch <= '9'))
+             return ch-0x30;
+         else if((ch >= 'A') && (ch <= 'F'))
+             return ch-'A'+10;
+         else if((ch >= 'a') && (ch <= 'f'))
+             return ch-'a'+10;
+         else return (-1);
+    }
+
+    int  TK::bytesToInt(const QByteArray &bytes,int size )
+
+    {
+
+    int a = bytes[0] & 0xFF;
+
+    a |= ((bytes[1] << 8) & 0xFF00);
+
+    a|= ((bytes[2] << 16) & 0xFF0000);
+
+    a |= ((bytes[3] << 24) & 0xFF000000);
+
+    return a;
+
+    }
