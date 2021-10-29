@@ -360,3 +360,16 @@ qDebug()<<ar;
 return ar;
 
 }
+bool g_tcp_model::closecheck(){
+
+    if(_b1||_b2||_b3||_b4||_b5||_b6)
+    {
+        return false;
+
+    }else{
+
+        return true;
+    }
+
+
+}

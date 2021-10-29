@@ -70,8 +70,13 @@ Rectangle {
             }
         }
         CloseBtn {
+            property bool showtip : false
             width: 24
             height: 24
+            ToolTip.delay: 200
+          //  ToolTip.text:"请关闭所有开关！"
+          //  ToolTip.visible:showtip
+          //  ToolTip.timeout: 1000
             onClicked: {
 
                 var str="00"+"#"+
@@ -82,11 +87,29 @@ Rectangle {
 
               // tcpc.write(gtcpmodel.str2tobyte(str))
 
-                det.start()
+               // det.start()
+if(gtcpmodel.closecheck()){
 
                 root.close()
+}else{
+                  //  showtip=true
+//msgdlg.title="请关闭所有加热开关！"
+   // msgdlg.open()
+}
             }
         }
+    }
+    Dialog{
+    id:msgdlg
+    modal: true
+
+//standardButtons: Dialog.Accepted|Dialog.Rejected
+
+    width: 200
+    height: 200
+
+    anchors.centerIn: root
+
     }
     Rectangle {
         id: splitLine

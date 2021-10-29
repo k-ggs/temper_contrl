@@ -69,6 +69,13 @@ public:
      void stop_record();
     QByteArray str2hex(QString value);
     QByteArray str2tobyte(QString value);
+
+
+    /**
+     * @brief closecheck if false  means not close all switch
+     * @return
+     */
+    bool closecheck();
     signals:
 
     void tem1Changed(float d);
