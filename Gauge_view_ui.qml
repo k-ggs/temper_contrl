@@ -276,14 +276,14 @@ onTriggered: {
 
                 }
 Rectangle{
-    Layout.preferredWidth: parent.height*0.5
+    Layout.fillWidth: true
     Layout.preferredHeight:parent.height*0.1
     color:CusConfig.CusConfig.backgroundColor
     RowLayout{
     anchors.fill: parent
     CusButton{
         Layout.fillHeight: true
-        Layout.fillWidth: true
+        Layout.preferredWidth: 100
     text: "保存记录"
     onClicked: {
     gtcpmodel.stop_record()
@@ -294,7 +294,7 @@ Rectangle{
         property string msg: "00"
      //   textColor: "red"
         Layout.fillHeight: true
-        Layout.fillWidth: true
+        Layout.preferredWidth: 200
     text:checked==true? "温度全开":"全开关闭"
     onClicked: {
         if(checked){
@@ -310,6 +310,8 @@ Rectangle{
     }
    CusSwitch{
    id:remo_c
+   Layout.fillHeight: true
+    Layout.preferredWidth: 200
    text:checked==true? "远程控制开":"远程控制关"
    property string rm_c: "01"
    checked: true
@@ -325,6 +327,27 @@ Rectangle{
    }
    }
    }
+
+    Rectangle{
+Layout.fillWidth: true
+Layout.fillHeight: true
+ColumnLayout{
+    anchors.fill: parent
+CusLabel{
+text: "误差分析"
+Layout.fillWidth: true
+Layout.preferredHeight: 30
+
+}
+CusTextField{
+Layout.fillWidth: true
+
+Layout.fillHeight: true
+text: iniwr.analysetxt
+}
+   }
+    }
+
     }
 }
       }

@@ -31,6 +31,8 @@ class ini_wr:public QObject
      Q_PROPERTY(QStringList Writedeviation READ Writedeviation )
     //Q_PROPERTY(QStringList port READ port )
 
+    Q_PROPERTY(QString analysetxt READ analysetxt )
+
 public:
 explicit   ini_wr(QObject * parent=nullptr);
 
@@ -47,6 +49,8 @@ explicit   ini_wr(QObject * parent=nullptr);
   QStringList Writedeviation()const{return _Writedeviation;}
   int defaulttemp()const{return _defaulttemp;}
   int defaultdeva()const{return _defaultdeva;}
+
+  QString analysetxt()const{return _analysetxt;}
 private:
 
   QString _ip;
@@ -57,7 +61,7 @@ private:
   QStringList _Writestates;
   QStringList _Writetemps;
   QStringList  _Writedeviation;
-
+QString _analysetxt;
 int _defaulttemp;
 int _defaultdeva;
 

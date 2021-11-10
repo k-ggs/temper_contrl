@@ -32,6 +32,9 @@ void ini_wr::readdefault()
 
    _defaulttemp=setFile.value("default/temp").toInt();
    _defaultdeva=setFile.value("default/deva").toInt();
+
+   _analysetxt=setFile.value("analysetxt/value").toString();
+   qDebug()<<_analysetxt;
 }
 
 

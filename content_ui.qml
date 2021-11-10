@@ -122,7 +122,7 @@ Loader{width: lis.width
        }
        Component.onCompleted: {
 
-CusConfig.currentTheme=2
+CusConfig.currentTheme=0
      //customPlot.setRange_tpe( {"lo":-10},2);
      //tcpc.toggleConnect(true,iniwr.ip,iniwr.port)
        }

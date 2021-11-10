@@ -188,3 +188,4 @@ target_link_libraries(temper_contrl
     # Qt${QT_VERSION_MAJOR}::Sql
     Qt${QT_VERSION_MAJOR}::WebSockets
   )
+Set_Target_Properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
